@@ -18,7 +18,7 @@ def schaffer(p):
 from sko.GA import GA
 from sko.operators import selection
 
-# 3. DEFINIR: Definim la teva classe AQUÍ mateix (no la importis, crea-la)
+
 class GA_t(GA):
     def __init__(self, func, n_dim, size_pop=50, max_iter=100, prob_mut=0.01, 
                  lb=-1, ub=1, constraint_eq=tuple(), constraint_ueq=tuple(), 
