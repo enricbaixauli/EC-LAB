@@ -1,0 +1,6 @@
+berlin52 & quick tour & 9.32 & 12.36 & 4.30 & 12.36 & 15.41\\
+berlin52 & closest-neighbor tour & 22.74 & 27.73 & 7.06 & 27.73 & 32.72\\
+berlin52 & pair-center (slow) tour & 7.27 & 7.27 & 0.00 & 7.27 & 7.27\\
+berlin52 & pair-center (fast) tour & 7.27 & 7.27 & 0.00 & 7.27 & 7.27\\
+berlin52 & pair-center (quick) tour & 1.74 & 1.74 & 0.00 & 1.74 & 1.74\\
+berlin52 & genetic algorithm tour & 3.81 & 5.86 & 2.91 & 5.86 & 7.92\\
