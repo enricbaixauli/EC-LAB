@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1774011747.14522 "c:/Users/enric/Desktop/MIA/EC/LAB/EC-LAB/scikit-opt-master/scikit-opt-master/memoria.tex" "memoria.pdf" "memoria" 1774011751.87723 0
+["pdflatex"] 1774029037.9842 "c:/Users/enric/Desktop/MIA/EC/LAB/EC-LAB/scikit-opt-master/scikit-opt-master/memoria.tex" "memoria.pdf" "memoria" 1774029044.70838 0
   "C:/Users/enric/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1773997177 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/enric/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1740772888 14064 d35361b63672ec05238fca5625547979 ""
   "C:/Users/enric/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1740772831 12015783 6cb5029134bc7dfaab9f373423647402 ""
@@ -176,7 +176,11 @@
   "C:/Users/enric/AppData/Local/Programs/MiKTeX/tex/latex/trimspaces/trimspaces.sty" 1253169183 1380 971a51b00a14503ddf754cab24c3f209 ""
   "C:/Users/enric/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/enric/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/enric/Desktop/MIA/EC/LAB/EC-LAB/scikit-opt-master/scikit-opt-master/memoria.tex" 1774011741 52012 7ab79b4e95c1fa0e222d211c7ad8a5a9 ""
+  "c:/Users/enric/Desktop/MIA/EC/LAB/EC-LAB/scikit-opt-master/scikit-opt-master/memoria.tex" 1774029037 53155 efa4289117bff96d69c04d3113a7012b ""
+  "comparativa_final_de_griewank_pop.png" 1773996579 767039 cb9d3d7ffd9c63bc09cf23f0715de3dc ""
+  "comparativa_final_de_griewank_w.png" 1773996518 883407 5aac4eb4c501583af211c4aafc91c989 ""
+  "comparativa_final_de_griewank_w_expanded.png" 1773996537 1037472 0d81320b8c592bf7d857172c506179d3 ""
+  "comparativa_final_de_rosenbrock_iter.png" 1773997005 482123 f37697f15c1a95cea42e274521f62cb6 ""
   "comparativa_final_pso_griewank_iterations.png" 1773996382 485325 242cd359dbb8f6e6624c68c5f6554059 ""
   "comparativa_final_pso_griewank_pop.png" 1773996273 834969 ba54d36dd71580094f7ea2e3d52b1995 ""
   "comparativa_final_pso_griewank_w.png" 1773999396 799416 2b11b0b1b054844945ff581fef175e03 ""
@@ -185,10 +189,10 @@
   "comparativa_final_pso_rosenbrock_pop.png" 1774009057 747814 74c2645fb20b4e61d7e0f5ee94887832 ""
   "comparativa_final_pso_rosenbrock_w.png" 1773996388 841972 6092227583429f80bf643929c01b0255 ""
   "comparativa_final_pso_rosenbrock_w_expanded.png" 1773996397 950443 7f569df4a2d50a1775067eac750829e4 ""
-  "memoria.aux" 1774011751 8736 a50e6c7028a1142cb7c52635093b936b "pdflatex"
-  "memoria.out" 1774011751 4878 e56c5cbef994cc8db77b63281657bb51 "pdflatex"
-  "memoria.tex" 1774011741 52012 7ab79b4e95c1fa0e222d211c7ad8a5a9 ""
-  "memoria.toc" 1774011751 2734 db7f1b4377435677c733e1cfd3bfe4d1 "pdflatex"
+  "memoria.aux" 1774029044 12301 de61b07b11e0d16e6b4ea09762208273 "pdflatex"
+  "memoria.out" 1774029044 4878 e56c5cbef994cc8db77b63281657bb51 "pdflatex"
+  "memoria.tex" 1774029037 53155 efa4289117bff96d69c04d3113a7012b ""
+  "memoria.toc" 1774029044 2734 c41f2d85c0167bea55195e3e4f68df7c "pdflatex"
   "portada.png" 1773997368 10319 e3145a0f1c17dcda4a4e75ffdc33e29b ""
   (generated)
   "memoria.aux"

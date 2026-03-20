@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.2) (preloaded format=pdflatex 2025.2.28)  20 MAR 2026 14:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.2) (preloaded format=pdflatex 2025.2.28)  20 MAR 2026 18:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -585,6 +585,30 @@ LaTeX Warning: Label `fig:placeholder' multiply defined.
 
 LaTeX Warning: Label `fig:placeholder' multiply defined.
 
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
 )
 \openout1 = `memoria.aux'.
 
@@ -845,54 +869,193 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.11}) has
 l.370         T
                he graph presented is really similar to the one from the Grie...]
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-
 [15
 pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.412 
+l.382 
        <./comparativa_final_pso_rosenbrock_iterations.png>]
 
 [16
 pdfTeX warning (ext4): destination with the same identifier (name{table.12}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.423     \item \textbf
-                       {Tournament Size}]
-
-[17]
-
-[18
+l.431                  T
+                        he comparative graph gives us more information about...
 pdfTeX warning (ext4): destination with the same identifier (name{table.13}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.473 
-      ]
+l.431                  T
+                        he comparative graph gives us more information about...]
+<comparativa_final_de_griewank_w.png, id=290, 849.6543pt x 569.4876pt>
+File: comparativa_final_de_griewank_w.png Graphic file (type png)
+<use comparativa_final_de_griewank_w.png>
+Package pdftex.def Info: comparativa_final_de_griewank_w.png  used on input line 434.
+(pdftex.def)             Requested size: 455.24411pt x 305.13776pt.
 
-[19]
 
-[20]
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[21
+
+
+[17
+pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.485 
+       <./comparativa_final_de_griewank_w.png>]
+<comparativa_final_de_griewank_w_expanded.png, id=297, 849.4134pt x 569.4876pt>
+File: comparativa_final_de_griewank_w_expanded.png Graphic file (type png)
+<use comparativa_final_de_griewank_w_expanded.png>
+Package pdftex.def Info: comparativa_final_de_griewank_w_expanded.png  used on input line 491.
+(pdftex.def)             Requested size: 455.24411pt x 305.21596pt.
+
+
+[18
 pdfTeX warning (ext4): destination with the same identifier (name{table.14}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.549 \subsubsection
-                    {Population Size}
+l.495 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{table.15}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.549 \subsubsection
+l.495 
+      ]
+<comparativa_final_de_griewank_pop.png, id=304, 847.968pt x 569.4876pt>
+File: comparativa_final_de_griewank_pop.png Graphic file (type png)
+<use comparativa_final_de_griewank_pop.png>
+Package pdftex.def Info: comparativa_final_de_griewank_pop.png  used on input line 519.
+(pdftex.def)             Requested size: 455.24411pt x 305.74603pt.
+
+
+[19
+pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.523 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{table.16}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.523 
+       <./comparativa_final_de_griewank_w_expanded.png>]
+File: comparativa_final_pso_griewank_iterations.png Graphic file (type png)
+<use comparativa_final_pso_griewank_iterations.png>
+Package pdftex.def Info: comparativa_final_pso_griewank_iterations.png  used on input line 543.
+(pdftex.def)             Requested size: 455.24411pt x 304.27747pt.
+
+
+[20
+pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.547 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{table.17}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.547 
+       <./comparativa_final_de_griewank_pop.png>]
+File: comparativa_final_pso_rosenbrock_w.png Graphic file (type png)
+<use comparativa_final_pso_rosenbrock_w.png>
+Package pdftex.def Info: comparativa_final_pso_rosenbrock_w.png  used on input line 576.
+(pdftex.def)             Requested size: 455.24411pt x 304.87706pt.
+
+
+[21
+pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.580 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{table.18}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.580 
+      ]
+File: comparativa_final_pso_rosenbrock_w_expanded.png Graphic file (type png)
+<use comparativa_final_pso_rosenbrock_w_expanded.png>
+Package pdftex.def Info: comparativa_final_pso_rosenbrock_w_expanded.png  used on input line 619.
+(pdftex.def)             Requested size: 455.24411pt x 304.87706pt.
+
+
+[22
+pdfTeX warning (ext4): destination with the same identifier (name{figure.13}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.623 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{table.19}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.623 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{table.20}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.623 
+      ]
+File: comparativa_final_pso_rosenbrock_pop.png Graphic file (type png)
+<use comparativa_final_pso_rosenbrock_pop.png>
+Package pdftex.def Info: comparativa_final_pso_rosenbrock_pop.png  used on input line 649.
+(pdftex.def)             Requested size: 455.24411pt x 303.5823pt.
+
+
+[23
+pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.653 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{table.21}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.653 
+      ]
+<comparativa_final_de_rosenbrock_iter.png, id=340, 847.7271pt x 569.4876pt>
+File: comparativa_final_de_rosenbrock_iter.png Graphic file (type png)
+<use comparativa_final_de_rosenbrock_iter.png>
+Package pdftex.def Info: comparativa_final_de_rosenbrock_iter.png  used on input line 677.
+(pdftex.def)             Requested size: 455.24411pt x 305.82423pt.
+
+
+[24
+pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.681 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{table.22}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.681 
+      ]
+
+[25
+pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.688 \newpage
+               <./comparativa_final_de_rosenbrock_iter.png>]
+
+[26
+pdfTeX warning (ext4): destination with the same identifier (name{table.23}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.744 \subsubsection
+                    {Population Size}
+pdfTeX warning (ext4): destination with the same identifier (name{table.24}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.744 \subsubsection
                     {Population Size}]
 
-[22]
+[27]
 
-[23]
+[28]
 
-[24] (memoria.aux)
+[29] (memoria.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -905,17 +1068,17 @@ Package rerunfilecheck Info: File `memoria.out' has not changed.
 (rerunfilecheck)             Checksum: E56C5CBEF994CC8DB77B63281657BB51;4878.
  ) 
 Here is how much of TeX's memory you used:
- 27719 strings out of 473523
- 574627 string characters out of 5714630
- 997781 words of memory out of 5000000
- 50433 multiletter control sequences out of 15000+600000
+ 27769 strings out of 473523
+ 576089 string characters out of 5714630
+ 997783 words of memory out of 5000000
+ 50461 multiletter control sequences out of 15000+600000
  566468 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 102i,10n,107p,1099b,535s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,10n,107p,882b,535s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\enric\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/enric/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/enric/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/enric/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/enric/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/enric/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on memoria.pdf (24 pages, 5333326 bytes).
+Output written on memoria.pdf (29 pages, 7952941 bytes).
 PDF statistics:
- 373 PDF objects out of 1000 (max. 8388607)
- 82 named destinations out of 1000 (max. 500000)
- 410 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 423 PDF objects out of 1000 (max. 8388607)
+ 104 named destinations out of 1000 (max. 500000)
+ 430 words of extra memory for PDF output out of 10000 (max. 10000000)
 
