@@ -1,0 +1,619 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, shadows}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+
+\geometry{margin=2.5cm}
+
+\title{\textit{}
+\includegraphics[width=0.7\textwidth]{portada.png}\\
+\textbf{Evolutionary Computation Report} \\
+\vspace{4cm}
+}
+\author{Enric Baixauli Casañ}
+\date{Universidade da Coruña Master’s Degree in Artificial Intelligence\\Evolutionary Computation – 2025–2026}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+\section{Introduction}
+
+\subsection{Description of the Problems}
+
+
+\newpage
+
+\section{Problem 1: Continuous Optimization}
+
+% For the first problem of this assignment, our objective is to perform various experiments with the different fitness functions we have early mentioned in the introduction. For each fitness function, we will conduct a sweep of parameters to find the best possible value (out of 3) for every parameter. We will do the sweep 2 times, one using binary coding and the other using real coding. 
+\subsection{Methodology}
+\subsubsection{Parameter Sweep Strategy}
+For these experiments, we decided to follow a sequential approach for parameter tuning. Instead of making a grid search with all possible combinations of the variables' fixed values, we set up an order of exploration, reducing significantly the computational cost the grid could bring. 
+
+Our criteria was to first test the variables that could impact the results the most, then pick their best values and set them for the remaining experimentation. 
+The order chosen was the following: 
+\begin{enumerate}
+    \item \textbf{w, c1 and c2 / F and CR}
+    \item \textbf{Population size} (prov. value = 50)
+    \item \textbf{Number of iterations} (prov. value = 150)
+\end{enumerate}
+
+\subsubsection{Global Values}
+In order to be coherent with the experiments, a set of values was defined regarding the different fitness functions and the difficulty of the tasks. For the \textbf{Griewank} function, we decided to bound the dominion to the standard \textbf{[-600, 600]}, on the other hand we reduced that variable significantly to \textbf{[-5, 5]} for \textbf{Rosenbrock} due to its difficult nature. Additionally, the predetermined \textbf{number of dimensions} was set to \textbf{10} in order to better analyse the behaviour of the algorithms thanks to a harder task.
+
+The number of \textbf{Monte Carlo runs} was also set to \textbf{30} for all experiments.
+\subsection{Particle Swarm Optimization}
+In this section we are will analyse the results of the experiments with the PSO algorithm performed both with Griewank and with Rosenbrock as fitness functions. Each time we will analyse the behaviour of the variables when changing their value, we will apply the order mentioned above.
+
+\subsubsection{Griewank function with PSO}
+\paragraph{Discussion of Results}
+
+
+    \begin{itemize} 
+        \item \textbf{w, c1 and c2}
+        
+        For these variables we selected the following initial configurations:
+
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{c c c c l}
+                \hline
+                \textbf{Config} & \textbf{w} & \textbf{c1} & \textbf{c2} & \textbf{Description} \\
+                \hline
+                1 & 0.8 & 0.5 & 0.5 & Moderate exploration \\
+                2 & 0.9 & 1.5 & 1.5 & High exploration ($c_1 + c_2 = 3$) \\
+                3 & 0.4 & 2.0 & 2.0 & Fast convergence ($c_1 + c_2 = 4$) \\
+                4 & 0.9 & 0.1 & 3.9 & Very social, low cognitive ($c_1 + c_2 = 4$) \\
+                \hline
+                \end{tabular}
+                \caption{Parameter configurations used in the experiments.}
+            \end{table}
+        They were chosen for their diversity, with these values we can create variate scenarios that help to test the algorithm. They also strictly follow the Engelbrecht rule of $c_1 + c_2 <= 4$.
+
+        Their final results were the following:
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{c c c c c c c}
+            \hline
+            \textbf{w} & \textbf{c1} & \textbf{c2} & \textbf{Avg Fit} & \textbf{Min Fit} & \textbf{Std Dev} \\
+            \hline
+            0.8 & 0.5 & 0.5 & 3.172754 & 0.034467 & 16.262547 \\
+            0.9 & 1.5 & 1.5 & 8.708526 & 2.178906 & 16.189889 \\
+             0.4 & 2.0 & 2.0 &  0.109450 & 0.040190 & 0.0601030 \\
+             0.9 & 0.1 & 3.9 & 240.514573 & 123.484132 & 58.864265 \\
+            \hline
+            \end{tabular}
+            \caption{First results of w, c1 and c2 on PSO, 10-dimensional Griewank function.}
+        \end{table}
+        Based on these results, we can clearly conclude that the best configuration is the fast convergence approach, the one with $w=0.4$, $c_1=2.0$ and $c_2=2.0$, as it achieves the best average fitness and minimum fitness, while also maintaining a very low standard deviation compared to the other configurations. 
+        
+        In the following graph, we can observe its behaviour compared to the other configurationsduring all the iterations:
+         \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{comparativa_final_pso_griewank_w.png}
+            \caption{Comparison of different w, c1 and c2 configurations on the Griewank function.}
+            \label{fig:placeholder}
+        \end{figure}
+        
+        In the solid lines we can appreciate the evolution of the best fitness, along with its standard deviation in the shaded area, while the dashed line represents the average of population average. 
+        As we expected, this configuration was the fastest to converge, reaching a very low fitness already in the first 30 generations and still dropping steadily until the end. Additionally, we can apprecieta how it is the only
+        combination that did not get stuck on a local minimum. This behaviour is explained by its overall equilibrium, the inertia weight of 0.4 allows the particles to maintain a good balance between exploration and exploitation, while the cognitive and social coefficients of 2.0 encourage the particles to effectively utilize both their own experience and the swarm's collective knowledge. 
+
+        On the contrary, the worst configuration, the one with $w=0.9$, $c_1=0.1$ and $c_2=3.9$, shows a very erratic behaviour, with a very high standard deviation and a very slow convergence, which is explained by the fact that the particles are too social and not cognitive enough, they rely too much on the swarm's collective knowledge and not enough on their own experience, which can lead to premature convergence and getting stuck in local minimums, as we can see in the graph.
+
+        Finally, the other two configurations, the moderate exploration and the high exploration, show a similar behaviour, with a slow convergence and a high standard deviation, which is explained by the fact that they have a high inertia weight, which allows the particles to explore more, but also makes them more likely to get stuck in local minimums as well.
+    
+        
+         With this in mind, we decided to further explore the area around the winning configuration, testing the following values:
+         
+         \begin{table}[h!]
+                \centering
+                \begin{tabular}{c c c c l}
+                \hline
+                \textbf{Config} & \textbf{w} & \textbf{c1} & \textbf{c2} & \textbf{Description} \\
+                \hline
+                1 & 0.4 & 2.0 & 2.0 & Best initial configuration \\
+                2 & 0.5 & 2.0 & 2.0 & Slightly higher inertia \\
+                3 & 0.3 & 2.0 & 2.0 & Slightly lower inertia \\
+                4 & 0.4 & 1.5 & 2.5 & More social, less cognitive ($c_1 + c_2 = 4$) \\
+                5 & 0.4 & 2.5 & 1.5 & More cognitive, less social ($c_1 + c_2 = 4$) \\
+                6 & 0.5 & 1.5 & 1.5 & Higher inertia, less social and cognitive ($c_1 + c_2 = 3$) \\
+                \hline
+                \end{tabular}
+                \caption{Additional parameter configurations for fine-tuning around the best initial configuration.}
+            \end{table}
+        
+       
+        
+            
+            The results were the following: 
+
+        \begin{table}[H]
+        \centering
+        \begin{tabular}{c c c c c c}
+        \hline
+        \textbf{w} & \textbf{c1} & \textbf{c2} & \textbf{Avg Fit} & \textbf{Min Fit} & \textbf{Std Dev} \\
+        \hline
+        0.4 & 2.0 & 2.0 & 0.128370 & 0.046725 & 0.069007 \\
+        0.5 & 2.0 & 2.0 & 0.195165 & 0.020333 & 0.117131 \\
+        0.3 & 2.0 & 2.0 & 0.110484 & 0.027086 & 0.072577 \\
+        0.4 & 1.5 & 2.5 & 0.121947 & 0.026916 & 0.077329 \\
+        0.4 & 2.5 & 1.5 & 0.094049 & 0.029510 & 0.043736 \\
+        0.5 & 1.5 & 1.5 & 0.100378 & 0.019678 & 0.060535 \\
+        \hline
+        \end{tabular}
+        \caption{Definitive results of w, c1 and c2 on PSO, 10-dimensional Griewank function.}
+        \end{table}
+        In this case, the results were remarkably similar, as their behaviour is considerably mor similar than before. Nonetheless, the configuration considered to be the best is the one with $w=0.4$, $c_1=2.5$ and $c_2=1.5$, as it is the most stable, achieving the best average fitness and standard deviation, while maintaining a good minimum fitness. 
+        The key of this success relies on the importance given to the cognitive component (as it is the only difference between the previous best), in Griewank we have a high quantity of local minimums, 
+        so you want particles to behave more independently at first, instead of blindly following the current global best because if at the beggining we start to give more importance to the social component, all particles will be attracted to the same local minimum, and it will be very hard for them to escape from it, while if we give more importance to the cognitive component, particles will have more freedom to explore the search space and find better solutions, even if they are not the current global best.
+        
+        The comparative graph gives more information:
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{comparativa_final_pso_griewank_w_expanded.png}
+            \caption{Comparison of the best configuration with other similar configurations.}
+            \label{fig:placeholder}
+        \end{figure}
+
+        As we expected, the new best configuration (yellow), while not being the first to reach a low fitness, it is the winner at the end of the iterations. 
+            
+        \item \textbf{Population}
+        
+        Once we had the best configuration of $w$, $c_1$ and $c_2$, we decided to test the impact of the population size, testing the following values: 30, 50, 200 and 600. These values were chosen to represent a low population (30, 50), a medium population (200) and a high population (600) and test the behaviour on these three scenarios. The results were the following:
+        \begin{table}[H]
+        \centering
+        \begin{tabular}{c c c c}
+        \hline
+        Population & Avg Fit & Min Fit & Std Dev \\
+        \hline
+        30  & 0.128553 & 0.009866 & 0.067793 \\
+        50  & 0.111909 & 0.024644 & 0.070827 \\
+        200 & 0.076620 & 0.016973 & 0.032238 \\
+        600 & 0.072795 & 0.019693 & 0.024755 \\
+        \hline
+        \end{tabular}
+        \caption{Results PSO – Griewank 10D}
+        \end{table}
+        These are not shocking, because as we know, increasing the population size generally leads to better performance in optimization algorithms, as it allows for a more diverse search of the solution space and reduces the chances of getting stuck in local minimums.
+        In this case, we can see that as the population size increases, the average fitness improves (decreases) and the standard deviation decreases as well, indicating that the algorithm is finding better solutions more consistently. The minimum fitness also improves with larger populations, which suggests that the algorithm is able to find better solutions overall.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{comparativa_final_pso_griewank_pop.png}
+            \caption{Results of the experiments based on population}
+            \label{fig:placeholder}
+        \end{figure}
+        In the graph we can see, how with 600 individuals, the algorithm converges faster but at the same time, its average of population average does not improve in comparison to the other population sizes. This phenomenon may be because with a larger population, the algorithm is able to find good solutions faster, but it may also be more likely to get stuck in local minimums, 
+        because a large population reduces diversity too quickly. Therefore the large part of the swarm that get stuck in the minimums affect the population average, while the best fitness can still improve because of the few individuals that are able to escape from those minimums.
+
+
+        \item \textbf{Number of Iterations}
+        
+        Finally, we tested the impact of the number of iterations, we used the same criteria as before with three values to represent a low, medium and high number of iterations.
+        We are aware that this variable will only give more "time" to the algorithm to find better solutions, but we wanted to test if there was a point of diminishing returns, where increasing the number of iterations does not lead to significant improvements in fitness or if, on the contrary, there's a threshold of iterations needed to drastically improve the results. The results were the following:
+        \begin{table}[h!]
+        \centering
+        \begin{tabular}{c c c c}
+        \hline
+        Iterations & Avg Fit & Min Fit & Std Dev \\
+        \hline
+        150 & 0.078052 & 0.032296 & 0.043496 \\
+        300 & 0.059282 & 0.014780 & 0.028738 \\
+        600 & 0.047147 & 0.014772 & 0.020200 \\
+        \hline
+        \end{tabular}
+        \caption{Results PSO – Griewank 10D}
+        \end{table}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{comparativa_final_pso_griewank_iterations.png}
+            \caption{Results of the experiments based on population}
+            \label{fig:placeholder}
+        \end{figure}
+        We can appreciate how in this specific scenario, there's a significant improvement when going from low to medium iterations, but from that point on the improvements become less relevant. This can be attributable to the Griewank function's multimodal landscape: once the swarm has identified a reasonably good basin of attraction, additional iterations tend to refine the solution only marginally. The particles gradually lose diversity as they are pulled toward the same region, so the algorithm’s ability to escape to a better basin diminishes.
+    \end{itemize}    
+        
+\subsubsection{Rosenbrock function with PSO}
+
+In this section, we will repeat the same experiments as with the Griewank section, but with Rosenbrock as fitness function. 
+All the values of the variables were the same as before, except for the domain, which was set to the range of [-5, 5] and of course the best w, c1 and c2, which will be determined.
+\paragraph{Discussion of Results}
+\begin{itemize} 
+        \item \textbf{w, c1 and c2}
+        
+        The results of the configurations were the following:
+        \begin{table}[H]
+        \centering
+        \begin{tabular}{c c c c c c}
+        \hline
+        $w$ & $c_1$ & $c_2$ & Avg Fit & Min Fit & Std Dev \\
+        \hline
+        0.8 & 0.5 & 0.5 & 203.828906 & 1.835968 & 461.019983 \\
+        0.9 & 1.5 & 1.5 & 654.842261 & 64.689540 & 911.626978 \\
+        0.4 & 2.0 & 2.0 & 9.636683 & 0.187247 & 16.723237 \\
+        0.9 & 0.1 & 3.9 & 90075.129604 & 48315.587328 & 33616.773437 \\
+        \hline
+        \end{tabular}
+        \caption{Results PSO – Rosenbrock 10D}
+        \end{table}
+
+        We can appreciate how, again, the winning configuration is the one with $w=0.4$, $c_1=2.0$ and $c_2=2.0$, thanks to its balanced nature of exploration and exploitation and cognitive and social components. Here, the results are remarkably worse than in the Griewank function, which is explained by high difficulty of the Rosenbrock function,
+         also the difference between the best and the worst configuration is much higher, which is as well explained by Rosenbrock's nature, which is a unimodal function with a narrow, parabolic-shaped valley. The high inertia weight and low cognitive/social coefficients in the worst configuration likely caused the particles to explore too broadly 
+         and even fall outside the narrow valley, while the lower inertia of the winner seems to have been able to manage the steepness of the valley.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{comparativa_final_pso_rosenbrock_w.png}
+            \caption{Enter Caption}
+            \label{fig:placeholder}
+        \end{figure}
+        
+        The plot gives more credibility to our hypothesis, as we can observe how the higher the inertia, the earlier the algorithm gets stuck in some local minimum. The lower inertia, on the other hand, allows the algorithm to keep exploring for a longer time, as we can see on the best configuration.
+            
+        Now, based on these findings, we tested the following configurations around the winner:
+         \begin{table}[H]
+                \centering
+                \begin{tabular}{c c c c l}
+                \hline
+                \textbf{Config} & \textbf{w} & \textbf{c1} & \textbf{c2} & \textbf{Description} \\
+                \hline
+                1 & 0.4 & 2.0 & 2.0 & Best initial configuration \\
+                2 & 0.5 & 2.0 & 2.0 & Slightly higher inertia \\
+                3 & 0.3 & 2.0 & 2.0 & Slightly lower inertia \\
+                4 & 0.4 & 1.5 & 2.5 & More social, less cognitive ($c_1 + c_2 = 4$) \\
+                5 & 0.4 & 2.5 & 1.5 & More cognitive, less social ($c_1 + c_2 = 4$) \\
+                6 & 0.5 & 1.5 & 1.5 & Higher inertia, less social and cognitive ($c_1 + c_2 = 3$) \\
+                \hline
+                \end{tabular}
+                \caption{Additional parameter configurations for fine-tuning around the best initial configuration.}
+        \end{table}
+        
+        And the results were the following:
+        \begin{table}[H]
+        \centering
+        \begin{tabular}{c c c c c c}
+        \hline
+        \textbf{w} & \textbf{c1} & \textbf{c2} & \textbf{Avg Fit} & \textbf{Min Fit} & \textbf{Std Dev} \\
+        \hline
+        0.4 & 2.0 & 2.0 & 5.652720 & 1.835969 & 1.645278 \\
+        0.5 & 2.0 & 2.0 & 30.541155 & 1.682337 & 89.561074 \\
+        0.3 & 2.0 & 2.0 & 5.298981 & 0.114563 & 2.339122 \\
+        0.4 & 1.5 & 2.5 & 22.868898 & 0.254218 & 45.768945 \\
+        0.4 & 2.5 & 1.5 & 5.797184 & 3.161424 & 1.858188 \\
+        0.5 & 1.5 & 1.5 & 114.799815 & 0.269950 & 454.250480 \\
+        \hline
+        \end{tabular}
+        \caption{Definitive results of w, c1 and c2 on PSO, 10-dimensional Rosenbrock function.}
+        \end{table}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{comparativa_final_pso_rosenbrock_w_expanded.png}
+            \caption{Results of the experiments based on the prior best combination of w, c1 \& c2}
+            \label{fig:placeholder}
+        \end{figure}
+
+        The better configuration is the one with $w=0.3$, $c_1=2.0$ and $c_2=2.0$, achieving the best average and minimum fitness, but a slighly higher standard deviation. 
+        The explanation for this may be in the relation with the inertia weight and the Rosenbrock function, thanks to the steepness of the valley the algorithm may need a lower
+         inertia to be able to navigate it, as we can see in the graph, the configuration with $w=0.5$ gets stuck in a local minimum very early, while the one with $w=0.3$ is able to keep improving until the end of the iterations, even if it has a higher standard deviation, which may be explained by the fact that with a lower inertia, particles are more likely to explore different regions of the search space, which can lead to a wider range of fitness values and therefore a higher standard deviation.
+            
+        \item \textbf{Population}
+        
+        Just as with the previous section, the greater the quantity of individuals the better were the results, we can see this clearly in the following table:
+
+        \begin{table}[H]
+        \centering
+        \begin{tabular}{c c c c}
+        \hline
+        Population & Avg Fit & Min Fit & Std Dev \\
+        \hline
+        30  & 8.415171 & 0.006544 & 15.978480 \\
+        50  & 15.860228 & 0.214079 & 32.603365 \\
+        200 & 4.244384  & 0.076317 & 1.583131 \\
+        600 & 3.325720  & 0.015000 & 1.765081 \\
+        \hline
+        \end{tabular}
+        \caption{Results PSO – Griewank 10D}
+        \end{table}
+
+        After looking at the data, we can clearly see the big impact population has on Rosenbrock, as the average fitness greatly dimishes with high populations. Nontheless, a strange phenomenon happens with the minimum fitness, as the best solution found with a population of 30 is better than the one found with a population of 50, which can be explained by the stochastic nature of the algorithm, as well as the high difficulty of the Rosenbrock function, which can lead to very different results in different runs, even with the same configuration.  
+        
+        As always, with the following graph we will be able to better understand the behaviour of the algorithm with different population sizes:
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{comparativa_final_pso_rosenbrock_pop.png}
+            \caption{Results of the experiments based on population}
+            \label{fig:placeholder}
+        \end{figure}
+        
+        Here the difference between the lowest 2 populations and the highest 2 is even more clear, as with 30 and 50 individuals, the algorithm gets stuck in a local minimum very early, while with 200 and 600 it falls later on, although it looks like it still gets stuck. 
+        Basically, with a larger population, the algorithm is able to explore more of the search space and therefore has a higher chance of finding better solutions on Rosenbrock's valley, while with a smaller population, the algorithm may get stuck in local minimums more easily.
+        With the average of population average, the worst one is again the one with 600 individuals, just as we saw in the Griewank function, and for the same reasons.
+
+        \item \textbf{Number of Iterations}
+        
+            The results of the different number of iterations were the following:
+
+        \begin{table}[H]
+        \centering
+        \begin{tabular}{c c c c}
+        \hline
+        Iterations & Avg Fit & Min Fit & Std Dev \\
+        \hline
+        150 & 3.492052 & 0.057507 & 1.208589 \\
+        300 & 2.718393 & 0.587443 & 0.740450 \\
+        600 & 1.648496 & 0.000239 & 0.834917 \\
+        \hline
+        \end{tabular}
+        \caption{Results PSO – Griewank 10D}
+        \end{table}
+        We can see that, here as well, there's more impact from this variable than in the Griewank function, as the difficulty of Rosenbrock makes the algorithm need more 
+        time to find good solutions. The minimum fitness value for 600 iterations is really small, meaning that the algorithm was able to find a solution very close to the global minimum, which is a great result considering the difficulty of the function. 
+        The minimum was even better than the best from Griewank, which is explained by the fact that Rosenbrock is a unimodal function, so once the algorithm finds the valley, it can keep improving until it reaches a very good solution, while in Griewank, the algorithm can get stuck in local minimums and therefore not be able to find such good solutions.
+        Another curious thing is that the average fitness for 300 iterations is worse than for 150 iterations, which can also be attributed to stochasticity.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{comparativa_final_pso_rosenbrock_iterations.png}
+            \caption{Results of the experiments based on iterations}
+            \label{fig:placeholder}
+        \end{figure}
+        The graph presented is really similar to the one from the Griewank function, with no sudden drop of fitness at the end of the iterations, but with a steady improvement over time. 
+\end{itemize}    
+
+
+\subsubsection{Conclusions on PSO}
+In this subsection 
+
+\subsection{Differential Evolution }
+
+\subsubsection{Griewank function with DE}
+\begin{table}[h!]
+\centering
+\begin{tabular}{l r r r}
+\hline
+Parameter & Value & Average Best Fitness & Std Dev \\
+\hline
+pop\_size       & 20 & 0.514023 & 0.598893 \\
+pop\_size        & 50 & 0.788247 & 0.661189 \\
+pop\_size        & 1000 & 0.528666 & 0.289791 \\
+prob\_mut        & 0.100 & 4.079171 & 1.517392 \\
+prob\_mut        & 0.010 & 0.824779 & 0.710771 \\
+prob\_mut        & 0.001 & 1.962932 & 2.889284 \\
+tournament\_size & 1     & 86.469211 & 87.293198 \\
+tournament\_size & 3     & 0.665754  & 0.702700 \\
+tournament\_size & 10    & 0.388103  & 0.444747 \\
+precision        & 0.100 & 1.166036  & 0.643124 \\
+precision        & 0.010 & 0.806755  & 0.778630 \\
+precision        & 0.001 & 0.705433  & 0.561900 \\
+\hline
+\end{tabular}
+\caption{Results for parameter variations in the Rosenbrock function (binary encoding).}
+\end{table}
+
+\paragraph{Discussion of Results}
+\begin{itemize} 
+
+    \item \textbf{Population Size}
+    
+
+    When observing the graphs above and, specifically, the fitness score followed by the generations, we can appreciate how the Average of Population Average follows a practically identical trajectory across all three population sizes, rapidly descending from the extreme high-penalty walls ($10^4$) and stabilizing around $10^3$ in the early generations.
+
+    However, the population size does dictates the speed at which the elite individuals find the valley floor. With just a population of 20, the algorithm lacks parallel exploration power, that's the reason why the Average Best Fitness drops very gradually from $10^3$ and only stabilizes around $10^0$ in the final 10 generations. Meanwhile, with the default size of 50, this descent is much more efficient, stabilizing near $10^0$ by generation 40, and with a huge population of 1000 individuals, the optimal valley floor is located considerably faster, stabilizing by generation 20.
+
+    Finally, even though the convergence plots suggest that larger populations converge more slowly, the final averages observed on the table shock with their results, here population 20 appears to perform best (0.5140), even beating population 50 (0.7882) and matching population 1000 (0.5286). But if we take a look at its enormous standard deviation (0.5988), we can quickly know why, in practice, the small population behaves chaotically: in some runs it gets lucky and starts near the optimum, and in others it fails completely. One of the advantages of augmenting the population is that this randomness disappears, for example by population 1000, the standard deviation shrinks dramatically (0.2897), meaning the algorithm reliably reaches the same low region every time. So while a huge population doesn’t magically break the flat floor of the binary Rosenbrock function, it does guarantee fast, stable, and repeatable convergence, something small populations simply cannot offer.
+    \item \textbf{Mutation Probability}
+    
+     
+
+    As it happened with the results from the Schaffer function, a mutation probability of 0.1 achieved really bad results, with no notable improvement between the metrics. This indicates that a 10\% mutation rate is far too aggressive, it constantly corrupts the genetic structure of the individuals, randomly throwing the vast majority of the population out of the optimal valley and high up into the steep walls of the Rosenbrock landscape.
+
+    A good balance is found with the default $0.01$, there can be seen a highly effective evolutionary dynamic, the population average drops rapidly before stabilizing, while the best individuals steadily descend toward the optimum. Mutation is now strong enough to introduce new information but not so strong that it disrupts progress, allowing the algorithm to isolate the valley reliably and achieve the best final result among the three settings (0.8247).
+    
+    Finally, lowering mutation too far to 0.001 cripples the search. The population average collapses dangerously close to the best fitness early on, a clear sign of premature convergence and loss of diversity. With so little mutation, the bit‑string representation cannot generate the new directions needed to navigate the flat floor of the Rosenbrock function, causing the population to stall in different suboptimal regions across runs. This leads to slow, incomplete convergence and a weak final average of 1.9629, accompanied by a very large standard deviation that reflects how inconsistently the algorithm performs when genetic innovation is nearly absent.
+    \item \textbf{Tournament Size}
+    
+     When the tournament size is reduced to 1, we already know the consequences: random search due to zero selective pressure. The results in this case are as bad as the previous ones seen in both Schaffer codings.
+     
+
+    On the other hand, a tournament size of 3 completely restores the evolutionary guidance. The Average of Population Average forms an "L" shape, dropping from over $10^4$ to $10^3$ early on and then stabilizing at that height. This stabilization is highly beneficial because it means the broader population continues to actively explore the upper slopes of the valley, preserving genetic diversity, while the elite individuals successfully exploit the central basin. Consequently, the Average Best Fitness drops gradually and smoothly from $10^3$ down to $10^0$ around generation 40, achieving a strong tabular result of $0.6657$.
+
+    Interestingly, increasing the tournament size to 10 yields the best final average performance ($0.3881$), contrasting sharply with the Schaffer experiments where high selection pressure caused premature convergence. This can be explained because in the context of the Rosenbrock function, the hyper-aggressive selection pressure actually provides a strategic advantage, by aggressively favoring the few individuals that manage to fall into the optimal valley early on, the algorithm avoids wasting generations evaluating the high-penalty walls. This forces the Average Best Fitness to reach $10^0$ notably faster (around generation 36). While the slightly thicker standard deviation ($0.4447$) indicates that this aggressive strategy introduces a bit more variance across independent runs, the overall rapid descent mechanism proves highly effective for navigating Rosenbrock's steep terrain.
+    \item \textbf{Precision}
+    
+    As with the Schaffer function under binary encoding, changing the precision does not alter the overall evolutionary behavior of the algorithm: all three precision settings produce nearly identical convergence curves, showing that the default configuration (population 50, mutation 0.01, tournament 3) is robust enough to guide the search into the Rosenbrock valley. 
+    
+    However, the final numerical results reveal that finer precision consistently provides better outcomes. With a resolution of 0.1, the algorithm achieves the weakest average best fitness (1.1660) because the binary grid is too rough to make the tiny adjustments required along the Rosenbrock valley floor. Even when the population reaches the basin, the chromosome simply lacks the decimal granularity needed to move closer to the true minimum. On the other hand, increasing precision to 0.001 dramatically improves the search resolution, allowing elite individuals to take much smaller, more accurate steps along the flat valley. As a result, the highest‑precision setting achieves the best final performance (0.7054), reflecting how essential a precise representation is for navigating the narrow and delicate structure of the Rosenbrock landscape.
+
+\end{itemize}
+
+\subsubsection{Rosenbrock function with DE}
+\begin{table}[h!]
+\centering
+\begin{tabular}{l r r r}
+\hline
+Parameter & Value & Average Best Fitness & Std Dev \\
+\hline
+size\_pop        & 20    & 28.683835 & 60.931344 \\
+size\_pop        & 50    & 1.215630  & 0.840684  \\
+size\_pop        & 1000  & 0.506016  & 0.126724  \\
+prob\_mut        & 0.100 & 1.164393  & 0.608901  \\
+prob\_mut        & 0.010 & 1.404411  & 1.299571  \\
+prob\_mut        & 0.001 & 1.910699  & 1.221233  \\
+tournament\_size & 1     & 82.596402 & 54.061199 \\
+tournament\_size & 3     & 1.680209  & 1.334997  \\
+tournament\_size & 10    & 2.106481  & 1.812013  \\
+\hline
+\end{tabular}
+\caption{Results for parameter variations in the Rosenbrock function (real encoding).}
+\end{table}
+
+\paragraph{Discussion of Results}
+\begin{itemize} 
+
+    \item \textbf{Population Size}
+    
+     We can observe that, as expected, with a small population of 20 individuals, the algorithm exhibits severe instability. Visually, the Average of Population Average drops from the high-penalty walls ($>10^4$) but gets trapped between $10^3$ and $10^2$ while displaying a very erratic behavior with numerous spikes. The Average Best Fitness similarly struggles, falling moderately fast initially but losing momentum around generation 20, ultimately stalling above $10^1$. All of this occurs because 20 individuals simply do not provide enough continuous genetic material to effectively map the narrow Rosenbrock valley. In fact, the results from the numeric table present a remarkably bad scenario, with a mean fitness of $28.6838$ and a massive standard deviation of $60.9313$, meaning many runs failed catastrophically while others got moderately lucky.
+    
+    Increasing the population to the default size of 50 stabilizes the optimization process, as observed in the plots, the Average of Population Average follows a similar trajectory than before but is noticeably calmer, with the erratic spikes mostly smoothed out. Guided by this stability, the Average Best Fitness confidently drops into the $10^0$ to $10^1$ range. The visual standard deviation remains moderate and controlled, which is directly reflected in the highly improved tabular average of $1.2156$ and a vastly reduced standard deviation of $0.8406$.
+    
+    Finally, with a massive population of 1000 individuals, the convergence plot becomes perfectly smooth, with the Average of Population Average showing absolute calm and zero erratic spikes. This shows that a massive population is capable of mapping the continuous space so thoroughly that the search never destabilizes. Thanks to this massive exploration, the Average Best Fitness reaches the $10^0$ mark much earlier and continues to refine itself to an even lower value. Also, the extremely thin standard deviation visually confirms what the tabular data proves: with 1000 individuals, the algorithm is incredibly reliable, achieving the best final average ($0.5060$) and an impressively low standard deviation ($0.1267$).
+    \item \textbf{Mutation Probability}
+    
+    If we take a look at the plots we can observe how, this time around, a lower mutation does not improve in all metrics. At first glance, the visual plots for the Average Best Fitness appear almost identical across all three configurations, successfully descending and stabilizing between $10^0$ and $10^1$, with the standard deviation also following a visually similar stabilization pattern. However, if we focus on the Average of Population Average, the lower the mutation probability, the more erratic the population's behavior becomes, drawing even dangerously close to the elite fitness line.
+
+    In this case, applying the lowest mutation rate of $0.001$ yields the worst tabular performance ($1.9106$) and a highly unstable standard deviation ($1.2212$). In the exceptionally narrow and curved Rosenbrock valley, a near-zero mutation rate prevents the injection of necessary genetic diversity., this is captured by the continuous, erratic upward spikes in the population average plot.
+
+    Conversely, applying a notably high mutation rate of $0.1$ proves to be the most effective strategy for this specific topography, providing us with the best final tabular average ($1.1643$) and the most stable standard deviation ($0.6089$). The plot for this configuration also shows a much smoother Average of Population Average that maintains a safe, healthy distance from the elite fitness. By introducing a higher degree of continuous random perturbation, the algorithm prevents the population from completely collapsing into a single point, thus allowing the individuals to spread out just enough to safely navigate the curved, flat floor of the valley without constantly crashing into the steep walls.
+    \item \textbf{Tournament Size}
+    
+
+    The results for the tournament with size 1 are no different from the ones that we have already seen. Thanks to it being basically a random search with no evolutionary guidance, the Average Best Fitness actually worsens slightly over time, resulting in an abysmal tabular average of 82.596 and a massive standard deviation of 54.061, also the Average of Population Average remains statically trapped at extreme penalty values around $10^5$.
+    
+    Restoring the tournament size to the default value of 3 provides the optimal selection pressure. The Average of Population Average successfully drops from the extreme heights and stabilizes between $10^2$ and $10^3$, exhibiting occasional spikes that indicate active, healthy exploration of the valley's upper slopes. Also the Average Best Fitness drops confidently and rapidly, reaching the $10^0$ to $10^1$ range around generation 20 and maintaining stability, which translates into an excellent final average of 1.680 and a very low, stable standard deviation of 1.334.
+
+    Interestingly, increasing the tournament size to 10 actively degrades the algorithm's efficiency, contrasting with the binary coding scenario where high pressure accelerated the descent. In real coding, a hyper-aggressive tournament size of 10 causes premature convergence. This can be explained because, due to the geometric characteristics of Rosenbrock, we need a gradual exploration to enter and follow the valley. With a tournament size of 10, the selective pressure is big because frequently the fittest individual of the population wins and the same individuals are repeatedly chosen, so the population turns homogeneous quickly and loses the genetic diversity to follow the valley.
+    
+\end{itemize}
+
+\subsubsection{Conclusions on DE}
+In contrast to the clear superiority of the real coding in the Schaffer function, in the optimization of the Rosenbrock function the binary coding is highly competitive and often superior. While the real coding requires a massive population of 1000 individuals to achieve an average fitness of 0.50, the binary achieves an excellent 0.38 by simply increasing the selective pressure, showing a much more stable convergence and free from the constant erratic peaks suffered by the real version.
+
+This anomaly can be explained by the Rosenbrock topology, just as we explained in the tournament size section, and it is characterized by an extremely flat, narrow, and curved optimal valley. This shape has an effect because, in the real coding, continuous crossover operators generate offspring by interpolating straight lines between the parents, and if two elite parents are at different points on the curve, the straight line connecting them can cut the curve and place the child outside the valley, crashing it into the steep walls of high penalty. On the contrary, this does not happen in binary coding, whose crossover operators completely avoid this geometric trap because instead of tracing continuous lines, they progress in small nonlinear jumps along its mathematical grid, which helps to avoid the curvature of the valley and descend much more efficiently towards the global minimum.
+
+\newpage
+
+\subsection{Comparative Analysis}
+\subsubsection{PSO vs DE}
+\subsubsection{Comparison with Genetic Algorithm (GA)}
+\subsection{Implementation Analysis (sko Package)}
+\subsubsection{Differences from Standard Theory}
+\section{Problem 2: Travelling Salesman Problem (TSP)}
+For the second problem of this assignment, our objective is to test different heuristics learned in theory classes and a custom genetic algorithm, in the context of the Traveling Salesman Problem, and compare their respective results. For this, we will start by doing a parameter sweep for the genetic algorithm in order to grasp the importance and best value of its parameters, then we will proceed with the creation of a custom genetic algorithm whose primary objective will be to beat the heuristics.
+
+
+For reference, the results obtained by the different heuristics were the following:
+\begin{table}[H]
+\centering
+\begin{tabular}{lccc}
+\hline
+\textbf{Heuristic} & \textbf{AvG Error (\%)} & \textbf{Min Error (\%)} & \textbf{Std Dev} \\
+\hline
+Closest-Neighbor & 24.10 & 8.47 & 5.67 \\
+Quick Tour (Random Insertion) & 10.78 & 4.64 & 3.84 \\
+Pair-Center (Slow/Fast) & 7.27 & 7.27 & 0.00 \\
+Pair-Center (Quick) & 1.74 & 1.74 & 0.00 \\
+\hline
+\end{tabular}
+\caption{Results of the heuristics}
+\end{table}
+
+
+\subsection{Parameter Analysis}
+In the table below we can observe the different values of the genetic algorithm's parameters and their corresponding results after a parameter sweep like the one performed in the first problem:
+\begin{table}[H]
+\centering
+\begin{tabular}{l c c c c c}
+\hline
+\textbf{Parameter} & \textbf{Value} & \textbf{Avg Error} & \textbf{Min Error} & \textbf{Std Dev} & \textbf{Max Error} \\
+\hline
+size\_pop   & 20.00   & 13.51 & 4.18 & 3.64 & 20.75 \\
+size\_pop   & 50.00   & 11.53 & 5.54 & 3.95 & 23.38 \\
+size\_pop   & 200.00  & 8.58  & 2.48 & 3.22 & 16.87 \\
+max\_iter   & 100.00  & 57.64 & 42.73 & 8.07 & 75.07 \\
+max\_iter   & 500.00  & 10.49 & 4.36 & 3.10 & 15.84 \\
+max\_iter   & 2000.00 & 8.67  & 1.70 & 3.87 & 18.77 \\
+prob\_mut   & 0.01    & 72.63 & 52.92 & 11.44 & 103.22 \\
+prob\_mut   & 0.10    & 19.41 & 11.63 & 4.60 & 29.89 \\
+prob\_mut   & 1.00    & 14.70 & 8.00 & 3.90 & 23.50 \\
+tourn\_size & 1.00    & 14.75 & 8.96 & 4.11 & 25.91 \\
+tourn\_size & 3.00    & 9.44  & 2.45 & 3.22 & 15.87 \\
+tourn\_size & 10.00   & 8.97  & 3.55 & 3.06 & 15.94 \\
+\hline
+\end{tabular}
+\caption{Results of GA Parameter Sweep for TSP (Berlin52)}
+\end{table}
+
+We will then proceed with a more specific analysis for each of the four presented parameters.
+
+
+\subsubsection{Population Size}
+
+
+
+Beginning with the population size analysis, because in this problem the search space for the berlin52 dataset is dramatically large ($52!$ possible permutations), we expected, and got, a direct correlation between a larger population size and a reduction in the relative error of the discovered tours.
+
+We can appreciate, based on the results, how with a small population of 20 individuals, the algorithm lacks the genetic diversity needed to fully explore the permutation space and frequently gets trapped in local minimums, yielding a high average error of $13.51\%$ and a high maximum error of $20.75\%$.
+
+As the population is increased to the default 50, and then massively to 200, the performance improves significantly. A population of 200 achieves the best average error ($8.58\%$) and dramatically lowers the minimum error found across the 30 runs down to an impressive $2.48\%$. Furthermore, the standard deviation narrows to $3.22$, and the maximum error drops to $16.87\%$, indicating higher reliability. Theoretically, this occurs because with more population comes more genetic diversity, and therefore a wider variety of valid city permutations. This extended spatial coverage, gives the crossover operators a richer set of parental edge sequences, allowing the algorithm to gather optimal sub-tours much more effectively without suffering from premature convergence.
+
+In comparison to the baseline heuristics, while a population of 20 only confidently beats the Closest-Neighbor approach ($24.10\%$), scaling the population to 200 allows the Genetic Algorithm to consistently outperform the Quick Tour heuristic ($10.78\%$) on average, and occasionally rival the highly optimized Pair-Center heuristics in its best runs.
+
+\subsubsection{Number of Generations}
+
+
+
+With the results of the different values of this hyperparameter, we have observed the importance of allowing the algorithm sufficient time to assemble optimal sub-tours (building blocks) into a complete, valid route.
+
+We can appreciate, the disastrous result of the performance when the model is restricted to only 100 generations, with an astonishing average relative error of $57.64\%$, with a massive standard deviation of $8.07$ and maximum errors reaching $75.07\%$. For the big size of this problem, 100 generations are simply insufficient for the crossover and mutation operators to really optimize the results.
+
+With 500 generations, there's a remarkable improvement and this shows how, given adequate time to exploit the genetic material, the algorithm correctly pieces together the local optimal edges, causing the average error to plummet to $10.49\%$. The standard deviation also narrows significantly to $3.10$, indicating a much more stable and predictable convergence pattern.
+
+Finally, with 2000 generations, the overall average error diminishes considerably less (as it was expected) but this reduction in the error is probably due to micro-adjustments in the elite individuals. Nevertheless, the minimum error achieved across the runs hits an extraordinary $1.70\%$. This specific run is of immense significance because it officially outperforms the highly optimized Pair-Center Quick heuristic ($1.74\%$). This proves that, given enough generational time, an evolutionary approach can beat deterministic heuristics. 
+
+\subsubsection{Mutation Probability}
+
+
+
+In the graph above we can see how applying a near-zero mutation rate ($0.01$) to the TSP results in catastrophic failure, yielding an abysmal average error of $72.63\%$ and a massive standard deviation of $11.44$.
+These results were unexpected at first, given the tendency we saw in the first problem of a better performance the lower the mutation rate was. But after some thought, and focusing on the change of paradigm of problem 2, it started to make sense.
+
+In continuous optimization, tiny mutations act like small nudges that help refine a solution smoothly, but in the TSP the search space is made of permutations, so small tweaks don’t fix a fundamentally bad route, you need large structural changes to escape poor city orders. Because crossover in TSP tends to produce children very similar to their parents, a low mutation rate quickly makes the whole population nearly identical, causing premature convergence. 
+
+The data shows that to break out of these rigid local minima, the TSP requires highly aggressive structural changes, that's why increasing the mutation probability to $0.10$ drastically reduces the average error to $19.41\%$ and maximizing the mutation rate to a fully aggressive $1.00$ yields the best performance among the three values tested, lowering the average error to $14.70\%$, the minimum error to $8.00\%$, and stabilizing the standard deviation to $3.90$.
+
+\subsubsection{Tournament Size}
+
+
+
+As expected, reducing the tournament size to 1 results in a poor average relative error of $14.75\%$ and a high standard deviation ($4.11$), this is due to the selection process becoming entirely random.
+
+Meanwhile, we can appreciate how restoring the tournament size to a moderate value of 3 provides an optimal evolutionary balance. This configuration yields a robust average error of $9.44\%$ and crucially, it achieves the absolute best minimum error among the three tested tournament values ($2.45\%$). Given these results, we can affirm that in this case the selection pressure is strong enough to propagate good sub-tours but gentle enough to maintain genetic diversity within the population.
+
+Conversely, augmenting the tournament size to 10 didn't give a major improvement, while the average relative error what slightly better ($8.97\%$), the best run showed a bigger error. This could be the consequence of flooding the population with clones of the early elite individuals, in this case the algorithm suffers from a degree of premature convergence and its exploratory power is diminished, preventing it from discovering the absolute best global routes.
+
+\newpage
+\subsection{Comparison with Classical Heuristics}
+After the analysis from the last section, we needed to use that obtained knowledge and create a genetic algorithm capable of beating the heuristics shown in the theory classes: \textit{Closest Neighbor}, \textit{Quick Tour} and \textit{Pair-Center}. The design selected for this purpose was the following: size\_pop = 200, max\_iter = 2000, prob\_mut = 1.0, tourn\_size = 3. We basically combined all the values that performed the best during their hyperparameter's individual evaluation, tested it across 30 Monte Carlo rounds and directly compared it to the three baseline heuristics provided in the theoretical framework. The result was the following:
+
+
+In the graph above, we can appreciate the results of the different heuristics: the \textit{Closest-Neighbor} approach performed the worst with $24.10\%$, the \textit{Quick Tour} achieved $10.78\%$, and the classical \textit{Pair-Center} algorithm stabilized at $7.27\%$. The highly optimized variant, the \textit{Pair-Center (Quick)}, set a remarkable limit with an error of just $1.74\%$.
+
+On the other hand, we can observe how our genetic algorithm, configured with massive spatial diversity (population of 200) and an extended temporal horizon (2000 generations), achieved an average error of 7.01\%, better that the three principal heuristics and only surpassed by the special faster \textit{Pair-Center}. 
+
+However, these results are taking into account only the average, if we look at the most important metric, the minimum result or best run, our genetic algorithm surpassed them all with a perfect 0.0\% of error. It mathematically reconstructed the absolute global optimum tour for the \textit{berlin52} dataset (a perfect length of 7542).
+
+These results express how, even if the classic heuristics are fast and capable of achieving great results (especially the quick \textit{Pair- Center)}, they inevitably get permanently stuck in complex local minimum, and are no match for a well configured genetic algorithm, which has the capacity to search all the solution space until finding the perfect solution.
+
+% \section{Conclusions}
+% \subsection{Summary of Findings}
+% \subsection{General Recommendations}
+% \subsection{Future Work}
+
+% \section{Appendix}
+% \subsection{Code Snippets}
+% \subsection{Additional Plots}
+% \subsection{Tables of Results}
+
+
+
+\end{document}
