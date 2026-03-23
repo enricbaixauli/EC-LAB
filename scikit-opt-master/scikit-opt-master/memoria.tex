@@ -8,6 +8,7 @@
 \usepackage{geometry}
 \usepackage{float}
 \usepackage[most]{tcolorbox}
+\usepackage{multirow}
 
 \geometry{margin=2.5cm}
 
@@ -323,7 +324,7 @@ All the values of the variables were the same as before, except for the domain, 
         600 & 3.325720  & 0.015000 & 1.765081 \\
         \hline
         \end{tabular}
-        \caption{Results PSO – Griewank 10D}
+        \caption{Results PSO – Rosenbrock 10D}
         \end{table}
 
         After looking at the data, we can clearly see the big impact population has on Rosenbrock, as the average fitness greatly dimishes with high populations. Nontheless, a strange phenomenon happens with the minimum fitness, as the best solution found with a population of 30 is better than the one found with a population of 50, which can be explained by the stochastic nature of the algorithm, as well as the high difficulty of the Rosenbrock function, which can lead to very different results in different runs, even with the same configuration.  
@@ -355,7 +356,7 @@ All the values of the variables were the same as before, except for the domain, 
         600 & 1.648496 & 0.000239 & 0.834917 \\
         \hline
         \end{tabular}
-        \caption{Results PSO – Griewank 10D}
+        \caption{Results PSO – Rosenbrock 10D}
         \end{table}
         We can see that, here as well, there's more impact from this variable than in the Griewank function, as the difficulty of Rosenbrock makes the algorithm need more 
         time to find good solutions. The minimum fitness value for 600 iterations is really small, meaning that the algorithm was able to find a solution very close to the global minimum, which is a great result considering the difficulty of the function. 
@@ -497,6 +498,7 @@ In this section we will perform the same experiments as with PSO, but with the D
         On the other hand, the minimum fitness keep improving slowly for the majority of the configurations, meaning that some individuals are being able to escape from those minimums.
         The best configuration (light blue) is the one that falls the most at the end of iterations.
         \item \textbf{Population}
+        
         Next, we tested the impact of the population size, same values as before, and the results were the following:
         \begin{table}[H]
         \centering
@@ -504,16 +506,17 @@ In this section we will perform the same experiments as with PSO, but with the D
         \hline
         Population & Avg Fit & Min Fit & Std Dev \\
         \hline
-        30  & 0.128553 & 0.009866 & 0.067793 \\
-        50  & 0.111909 & 0.024644 & 0.070827 \\
-        200 & 0.076620 & 0.016973 & 0.032238 \\
-        600 & 0.072795 & 0.019693 & 0.024755 \\
+        30  & 0.142707 & 0.043529 & 0.060412 \\
+        50  & 0.123638 & 0.024928 & 0.048246 \\
+        200 & 0.103649 & 0.056918 & 0.020722 \\
+        600 & 0.082491 & 0.037309 & 0.019313 \\
         \hline
         \end{tabular}
-        \caption{Results PSO – Griewank 10D}
+        \caption{Results DE – Griewank 10D}
         \end{table}
         It's apparent that increasing the population leads to better average results, because with more individuals there will be more of them that can effectively leave the local minimums.
-        % Its also noted that this improvement is not linear, as the results with 200 individuals don't
+
+        In the following graph we can see the behaviour of the algorithm with different population sizes:
         \begin{figure}[H]
             \centering
             \includegraphics[width=1\linewidth]{comparativa_final_de_griewank_pop.png}
@@ -521,30 +524,39 @@ In this section we will perform the same experiments as with PSO, but with the D
             \label{fig:placeholder}
         \end{figure}
        
+        We can actually see how, as expected, the algorithm with 600 individuals is consistently better than the rest even though they follow a similar trend.
 
         \item \textbf{Number of Iterations}
-        
-        \begin{table}[h!]
+        \item 
+        Finally, we tested the impact of the number of iterations, and the results were the following:
+        \begin{table}[H]
         \centering
         \begin{tabular}{c c c c}
         \hline
         Iterations & Avg Fit & Min Fit & Std Dev \\
         \hline
-        150 & 0.078052 & 0.032296 & 0.043496 \\
-        300 & 0.059282 & 0.014780 & 0.028738 \\
-        600 & 0.047147 & 0.014772 & 0.020200 \\
+        150 & 0.085466 & 0.030789 & 0.017404 \\
+        300 & 0.000858 & 0.000097 & 0.000490 \\
+        600 & 3.700743e-18 & 0.000000 & 1.992911e-17 \\
         \hline
         \end{tabular}
-        \caption{Results PSO – Griewank 10D}
+        \caption{Results DE – Griewank 10D}
         \end{table}
-
+        From past experience, we knew that the bigger the number of iterations, the better the results, but the interesting part
+        here was that the sheer amount of improvement made it so the algorithm was able to achieve a perfect result with 600 iterations and a 
+        near perfect result with 300 iterations. This shows how powerful DE can be when leaving it enough time to find good solutions.
+        
+        This behaviour was clearly represented on the following graph:
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\linewidth]{comparativa_final_pso_griewank_iterations.png}
-            \caption{Results of the experiments based on population}
+            \includegraphics[width=1\linewidth]{comparativa_final_de_griewank_iter.png}
+            \caption{Results of the experiments based on iterations}
             \label{fig:placeholder}
         \end{figure}
-
+        As a contrast to the PSO algorithm, in DE we can see a significant drop of fitness within the last 300 iterations. This shows us how
+         DE is able to escape from local minimums more effectively than PSO, and therefore iterations have a bigger impact on the results.
+        This is consistent with the fact that DE is a more exploratory algorithm than PSO. Also, the average of population average's sudden drop
+        before 500 iterations shows the moment when the majority of the individuals in the population were able to escape from local minimums.
     \end{itemize}    
         
 \subsubsection{Rosenbrock function with DE}
@@ -552,45 +564,57 @@ In this section we will perform the same experiments as with PSO, but with the D
 
 \paragraph{Discussion of Results}
 \begin{itemize} 
-        \item \textbf{w, c1 and c2}
+        \item \textbf{F and CR}
         
-        The results of the configurations were the following:
+        For the Rosenbrock function, we used the same initial configurations as with the Griewank function, and the results were the following:
         \begin{table}[H]
         \centering
         \begin{tabular}{c c c c c c}
         \hline
-        $w$ & $c_1$ & $c_2$ & Avg Fit & Min Fit & Std Dev \\
+        $F$ & $CR$ & Avg Fit & Min Fit & Std Dev \\
         \hline
-        0.8 & 0.5 & 0.5 & 203.828906 & 1.835968 & 461.019983 \\
-        0.9 & 1.5 & 1.5 & 654.842261 & 64.689540 & 911.626978 \\
-        0.4 & 2.0 & 2.0 & 9.636683 & 0.187247 & 16.723237 \\
-        0.9 & 0.1 & 3.9 & 90075.129604 & 48315.587328 & 33616.773437 \\
+        0.5 & 0.3 & 10.651966 & 7.185805 & 3.266044 \\
+        0.7 & 0.5 & 10.351983 & 7.809374 & 1.921897 \\
+        0.5 & 0.9 & 5.532096 & 2.730945 & 1.210683 \\
+        0.9 & 0.9 & 28.531120 & 14.829063 & 10.098321 \\
         \hline
         \end{tabular}
-        \caption{Results PSO – Rosenbrock 10D}
+        \caption{Results DE – Rosenbrock 10D}
         \end{table}
 
-       
+        Based on these results there's a clear winner, even doubling the average fitness of the second best configuration, which is the one with $F=0.5$ and $CR=0.9$.
+        It is clear that, compared to Griewank, in Rosenbrock we need a higher CR, this is probably due to the interdependency of the variables in Rosenbrock, where we need coordinated changes in multiple dimensions to effectively navigate the narrow valley.
+        Additionally, it was also expected that the lowest F would give the best performance, as if the mutation factor is too high, the algorithm may not adapt well to the valley, overshooting good solutions.
+            The worst configuration is the one with $F=0.9$ and $CR=0.9$, which is consistent with the results from Griewank, as it seems that such high values of F and CR lead to a very exploratory behavior that is not effective for finding good solutions in a complex search space like Rosenbrock's.
+            
+            The comparative graph gives us more information about the behaviour of these configurations during all the iterations:
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\linewidth]{comparativa_final_pso_rosenbrock_w.png}
-            \caption{Enter Caption}
+            \includegraphics[width=1\linewidth]{comparativa_f_cr_de_rosenbrock.png}
+            \caption{Comparison of different F and CR configurations on the Rosenbrock function.}
             \label{fig:placeholder}
         \end{figure}
         
+        Our best configuration was the fastest to drop its fitness, but it slowed its pace at around iteration 60, which is probably due to the fact that it got stuck in a local minimum, and
+        it wasn't able to escape from it, on the other hand the other configurations seemed to have a more lineal improvement, but were always worse than the best one and even showed
+        some slowing down at the end of the iterations.
+        It is interesting how the average of the population average for the best configuration converged to its minimum fitness when the minimum was found, this means that
+        the majority of the individuals in the population were able to find that good solution. 
+
+            Based on these findings, we decided to further explore the area around the winning configuration, testing the following values:
         
          \begin{table}[H]
                 \centering
                 \begin{tabular}{c c c c l}
                 \hline
-                \textbf{Config} & \textbf{w} & \textbf{c1} & \textbf{c2} & \textbf{Description} \\
+                \textbf{Config} & \textbf{F} & \textbf{CR} &  & \textbf{Description} \\
                 \hline
-                1 & 0.4 & 2.0 & 2.0 & Best initial configuration \\
-                2 & 0.5 & 2.0 & 2.0 & Slightly higher inertia \\
-                3 & 0.3 & 2.0 & 2.0 & Slightly lower inertia \\
-                4 & 0.4 & 1.5 & 2.5 & More social, less cognitive ($c_1 + c_2 = 4$) \\
-                5 & 0.4 & 2.5 & 1.5 & More cognitive, less social ($c_1 + c_2 = 4$) \\
-                6 & 0.5 & 1.5 & 1.5 & Higher inertia, less social and cognitive ($c_1 + c_2 = 3$) \\
+                1 & 0.5 & 0.9 & & Best initial configuration \\
+                2 & 0.6 & 0.9 & & Slightly higher F \\
+                3 & 0.4 & 0.9 & & Slightly lower F \\
+                4 & 0.3 & 0.8 & & Slightly lower F and CR \\
+                5 & 0.3 & 0.9 & & Lower F and same CR \\
+                6 & 0.5 & 0.8 & & Same F and slightly lower CR \\
                 \hline
                 \end{tabular}
                 \caption{Additional parameter configurations for fine-tuning around the best initial configuration.}
@@ -601,30 +625,35 @@ In this section we will perform the same experiments as with PSO, but with the D
         \centering
         \begin{tabular}{c c c c c c}
         \hline
-        \textbf{w} & \textbf{c1} & \textbf{c2} & \textbf{Avg Fit} & \textbf{Min Fit} & \textbf{Std Dev} \\
+        \textbf{F} & \textbf{CR} & \textbf{Avg Fit} & \textbf{Min Fit} & \textbf{Std Dev} \\
         \hline
-        0.4 & 2.0 & 2.0 & 5.652720 & 1.835969 & 1.645278 \\
-        0.5 & 2.0 & 2.0 & 30.541155 & 1.682337 & 89.561074 \\
-        0.3 & 2.0 & 2.0 & 5.298981 & 0.114563 & 2.339122 \\
-        0.4 & 1.5 & 2.5 & 22.868898 & 0.254218 & 45.768945 \\
-        0.4 & 2.5 & 1.5 & 5.797184 & 3.161424 & 1.858188 \\
-        0.5 & 1.5 & 1.5 & 114.799815 & 0.269950 & 454.250480 \\
+                  0.5 &            0.9 & 5.880140 & 3.921010 & 0.904368 \\
+         0.6 &             0.9 & 6.417211 & 4.913347 & 0.840290 \\
+            0.4 &             0.9 & 6.423973 & 3.878515 & 1.026326 \\
+            0.3 &             0.8 & 6.675486 & 4.191744 & 1.204428 \\
+            0.3 &             0.9 & 7.515228 & 4.510242 & 1.415243 \\
+            0.5 &             0.8 & 6.254889 & 4.951439 & 0.770662 \\
         \hline
         \end{tabular}
-        \caption{Definitive results of w, c1 and c2 on PSO, 10-dimensional Rosenbrock function.}
+        \caption{Definitive results of F and CR on DE, 10-dimensional Rosenbrock function.}
         \end{table}
+        It seems that the best configuration is still the one with $F=0.5$ and $CR=0.9$, this can mean that the moderate value of F hits the right spot for Rosenbrock, because lower and higher values degraded performance.
+        Moreover, it is also consistent that the higher CR is needed for this function, because with F fixed at 0.5, the configuration with CR of 0.8 is worse than the one with CR of 0.9, and with F fixed at 0.3, the configuration with CR of 0.9 is better than the one with CR of 0.8.
 
+        In the following graph we can observe better the permormance of these configurations:
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\linewidth]{comparativa_final_pso_rosenbrock_w_expanded.png}
-            \caption{Results of the experiments based on the prior best combination of w, c1 \& c2}
+            \includegraphics[width=1\linewidth]{comparativa_f_cr_final_de_rosenbrock.png}
+            \caption{Results of the experiments based on the prior best combination of F \& CR}
             \label{fig:placeholder}
         \end{figure}
 
-        
+        We can see how they are all really similar, but there's a trend in a sense that those with the lowest values of F tend to converge faster,
+        it makes sense considereing that the lower the value the more fine tuning the algorithm is able to do. Nonetheless,
+        at the end of iterations we can appreciate how the configurations with higher F are able to catch up and even surpass them, as it happens with the best configuration.
         \item \textbf{Population}
         
-        
+        The results of the different population sizes were the following:
         
 
         \begin{table}[H]
@@ -633,25 +662,28 @@ In this section we will perform the same experiments as with PSO, but with the D
         \hline
         Population & Avg Fit & Min Fit & Std Dev \\
         \hline
-        30  & 8.415171 & 0.006544 & 15.978480 \\
-        50  & 15.860228 & 0.214079 & 32.603365 \\
-        200 & 4.244384  & 0.076317 & 1.583131 \\
-        600 & 3.325720  & 0.015000 & 1.765081 \\
+        30  & 6.926613 & 3.974404 & 1.135637 \\
+        50  & 6.370480 & 5.257854 & 0.710968 \\
+        200 & 5.775775 & 5.141781 & 0.213696 \\
+        600 & 5.644490 & 4.981572 & 0.242364 \\
         \hline
         \end{tabular}
-        \caption{Results PSO – Griewank 10D}
+        \caption{Results DE – Rosenbrock 10D}
         \end{table}
 
+        In this case, the impact of population enlargement is not as significant as in the Griewank function, 
+        but, as always, it still shows that with more individuals the algorithm is able to find better solutions.
         
-        
+        The following graph gives us a better understanding of the behaviour of the algorithm with different population sizes:
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\linewidth]{comparativa_final_pso_rosenbrock_pop.png}
+            \includegraphics[width=1\linewidth]{comparativa_final_de_rosenbrock_pop.png}
             \caption{Results of the experiments based on population}
             \label{fig:placeholder}
         \end{figure}
         
-        
+        Here we can appreciate how, as happened with PSO, the configurations with more populations
+         tend to have a higher average of population average.
         
         \item \textbf{Number of Iterations}
         
@@ -663,152 +695,215 @@ In this section we will perform the same experiments as with PSO, but with the D
         \hline
         Iterations & Avg Fit & Min Fit & Std Dev \\
         \hline
-        150 & 3.492052 & 0.057507 & 1.208589 \\
-        300 & 2.718393 & 0.587443 & 0.740450 \\
-        600 & 1.648496 & 0.000239 & 0.834917 \\
+        150 & 5.718332 & 5.262399 & 0.187409 \\
+        300 & 2.034989 & 1.606199 & 0.240675 \\
+        600 & 0.001277 & 0.000460 & 0.000714 \\
         \hline
         \end{tabular}
-        \caption{Results DE – Griewank 10D}
+        \caption{Results DE – Rosenbrock 10D}
         \end{table}
        
-        
+        Here we can appreciate how the difference between iterations is also striking, achieving really low values with 600 iterations, 
+        although it is not as exaggerated as with Griewank. This phenomenon was to be expected, as Rosenbrock is a harder function, it is more difficult, even for strong algorithms like DE,
+        to find the optimal solution.
+
+        The following graph gives us a better understanding of what's happening:
         \begin{figure}[H]
             \centering
             \includegraphics[width=1\linewidth]{comparativa_final_de_rosenbrock_iter.png}
             \caption{Results of the experiments based on iterations}
             \label{fig:placeholder}
         \end{figure}
-
+        We can see the big drop in fitness, but at the same time it is not as sudden as with Griewank, it is more gradual due to the augmented difficulty.
+        This is also reflected with the average of population average, in this case it does not drop vertically as with Griewank, meaning the majority of the individuals are still finding the good solutions, but not the best ones.
     \end{itemize}    
 
 
 \subsubsection{Conclusions on DE}
 
+% With differential evolution, we observed a robust and adaptive optimization process, particularly well-suited for complex landscapes like Rosenbrock. The experiments highlighted several key findings:
 
+% First, the choice of parameters had a decisive impact on performance. For Rosenbrock, the best results were consistently achieved with a moderate mutation factor ($F=0.5$) and a high crossover rate ($CR=0.9$), underscoring the importance of coordinated changes across dimensions in navigating the function's narrow valley. This contrasts with the Griewank function, where lower $CR$ values were more effective, reflecting the different natures of the two landscapes.
+
+% Second, while increasing the population size led to gradual improvements, the effect was less pronounced than in PSO. This suggests that DE's mutation and crossover mechanisms are inherently effective at maintaining diversity, reducing the need for very large populations to avoid premature convergence.
+
+% Third, the number of iterations played a critical role in solution quality. With 600 iterations, DE was able to approach the global optimum on Rosenbrock, achieving extremely low minimum fitness values. This demonstrates the algorithm's capacity for fine-tuning and persistent improvement, especially in unimodal or highly structured search spaces.
+
+% Overall, DE proved to be a highly competitive algorithm, capable of outperforming PSO in certain scenarios, particularly when variable interdependencies are significant. Its adaptive search dynamics and efficient use of population diversity make it a strong choice for continuous optimization problems where both exploration and exploitation are essential.
+
+
+With differential evolution, we observed great adaptativity and robustness, especially in the Rosenbrock function, which is a more complex landscape. The choice of parameters had a significant impact on performance, with moderate mutation and high crossover rates yielding the best results for Rosenbrock, while lower crossover rates were more effective for Griewank. Increasing population size led to improvements, but the effect was less pronounced than in PSO, suggesting that DE's mechanisms maintain diversity effectively. The number of iterations was critical, with 600 iterations allowing DE to approach the global optimum on Rosenbrock. Overall, DE proved to be a highly competitive algorithm, particularly when variable interdependencies are significant.
 \newpage
 
 \subsection{Comparative Analysis}
 \subsubsection{PSO vs DE}
+% When comparing both algorithms, we can see that DE generally outperformed PSO in both functions, achieving better average and minimum fitness values. 
+% This is likely due to DE's more effective exploration and exploitation mechanisms, that assist it in navigating complex search spaces more efficiently. 
+% In particular, DE's ability to escape local minimums and fine-tune solutions 
+% contributed to its superior performance, especially in the Rosenbrock function where variable interdependencies 
+% are significant. PSO, while still effective, struggled more with local minimums and required careful parameter tuning 
+% to achieve competitive results.
+
+When comparing both algorithms, we can see that DE generally outperformed PSO in 
+both functions, achieving better average and minimum fitness values.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c c c}
+\hline
+\textbf{Function} & \textbf{Algorithm} & \textbf{Best Avg Fit} & \textbf{Best Min Fit} & \textbf{Best Std Dev} \\
+\hline
+\multirow{2}{*}{Griewank 10D} 
+& PSO & 0.072795 & 0.019693 & 0.024755 \\
+& DE & 3.70e-18 & 0.000000 & 1.99e-17 \\
+\hline
+\multirow{2}{*}{Rosenbrock 10D} 
+& PSO & 1.648496 & 0.000239 & 0.834917 \\
+& DE & 0.001277 & 0.000460 & 0.000714 \\
+\hline
+\end{tabular}
+\caption{Best results comparison between PSO and DE}
+\end{table}
+
+This is likely due to DE's more effective exploration and exploitation mechanisms 
+through its mutation and crossover operators. In particular:
+
+\begin{itemize}
+\item \textbf{Griewank:} DE achieved near-perfect results (3.70e-18) compared to PSO's 
+0.072795. This demonstrates DE's superior ability to escape the many local minima 
+of this multimodal function through its difference vector mutation mechanism.
+
+\item \textbf{Rosenbrock:} DE also outperformed PSO (0.001277 vs 1.648496 average), 
+though the gap is smaller. DE's high crossover rate (CR=0.9) allowed coordinated 
+changes across interdependent variables, crucial for navigating the narrow valley.
+\end{itemize}
+
+\paragraph{Key Differences Observed:}
+\begin{enumerate}
+\item \textbf{Convergence Pattern:} PSO shows rapid initial convergence but often 
+plateaus early. DE shows slower initial progress but continues improving throughout 
+all iterations, especially visible in the 300-600 iteration range.
+
+\item \textbf{Parameter Sensitivity:} PSO was more sensitive to parameter changes, 
+particularly the inertia weight $w$. DE showed more robust performance across 
+different $F$ and $CR$ combinations.
+
+\item \textbf{Population Impact:} Both algorithms benefited from larger populations, 
+but PSO showed more dramatic improvements, suggesting it relies more on swarm 
+diversity than DE does.
+\end{enumerate}
 \subsubsection{Comparison with Genetic Algorithm (GA)}
-\subsection{Implementation Analysis (sko Package)}
-\subsubsection{Differences from Standard Theory}
+To contextualize the performance of PSO and DE, we compare our results with those obtained from Genetic Algorithm experiments conducted in a previous assignment using the same benchmark functions. It's important to note some methodological differences: the GA experiments used 4-dimensional Rosenbrock while our PSO/DE experiments used 10-dimensional versions, and GA tested both binary and real coding while PSO/DE operate naturally in continuous space.
+
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l c c c c}
+\hline
+\textbf{Algorithm} & \textbf{Configuration} & \textbf{Best Avg Fitness} & \textbf{Best Std Dev} \\
+\hline
+GA (Real) & Pop 1000, 4D & 0.506016 &  0.126724 \\
+PSO & Pop 600, 10D & 1.648496 &  0.834917 \\
+DE & Pop 50, Iter 600, 10D & 0.001277 & 0.000714 \\
+\hline
+\end{tabular}
+}
+\caption{Performance comparison on Rosenbrock function.}
+\end{table}
+
+
+We can appreciate how Differential Evolution demonstrated clear superiority on the Rosenbrock function, achieving an average fitness of 0.001277 despite operating in 10 dimensions compared to GA's 4 dimensions. 
+This result can be attributed to DE's difference-vector mutation mechanism, which naturally coordinates changes across interdependent variables through its high crossover rate (CR=0.9), thus allowing the algorithm to follow Rosenbrock's valley effectively.
+
+Genetic Algorithms with real coding achieved competitive results (0.506016) but required substantially larger populations (1000 individuals) to maintain sufficient diversity.
+
+On the other hand, Particle Swarm Optimization struggled most significantly (1.648496 average), requiring both large populations (600) and many iterations (600) without matching competitor performance. 
+This can be explained by its tencency to overshoot the narrow valley. 
+With this we can conclude that PSO's strength lies in implementation simplicity rather than raw optimization power for this problem type.
+
+
+Regarding convergence behavior, DE showed sustained improvement throughout all iterations with dramatic late-stage refinement (iterations 300-600), while PSO plateaued prematurely and GA maintained steadier but slower progress. 
+
+In conclusion, for continuous optimization problems with variable interdependencies like Rosenbrock, Differential Evolution provides the best balance of performance, parameter simplicity, and robustness. GA remains valuable for discrete representations, while PSO requires careful tuning to achieve competitive results on complex landscapes.
+
 \section{Problem 2: Travelling Salesman Problem (TSP)}
-For the second problem of this assignment, our objective is to test different heuristics learned in theory classes and a custom genetic algorithm, in the context of the Traveling Salesman Problem, and compare their respective results. For this, we will start by doing a parameter sweep for the genetic algorithm in order to grasp the importance and best value of its parameters, then we will proceed with the creation of a custom genetic algorithm whose primary objective will be to beat the heuristics.
+For the second problem of this assignment, our objective is to test the PSO algorithm on the Travelling Salesman Problem (TSP), which is a well-known combinatorial optimization problem. The TSP asks for the shortest possible route that visits a set of cities and returns to the origin city.
 
+We will make use of the already implemented PSO-TSP function from the scikit-opt library, 
+and we will compare our results to the Genetic Algorithm (GA) that we implemented in a previous assignment.
 
-For reference, the results obtained by the different heuristics were the following:
+Our objective is to observe if we can achieve the minimum distance of 7542, which is the known optimal solution for the berlin52 TSP instance, and to compare the performance of PSO with GA in terms of solution quality and computational time.
+
+\subsection{PSO for TSP}
+\subsubsection{Parameter Tuning}
+While looking at the code of the PSO-TSP function, we discovered that it did not make use of the inertia weight $w$ or the $c1$ and $c2$ parameters, so the only parameters we could tune were the population size and the number of iterations.
+Then, we decided to set an iteration number of 2000 to give the algorithm enough time to find good solutions (and because it was the number set in the last assignment), and we focused on tuning the population size, testing the following values: 50, 100 and 200.
+We also set the number of runs to 10, it was low but this problem required a lot of time to run, and we wanted to be able to test different configurations in a reasonable amount of time.
+
+\paragraph{Population size}
+
+The results of the different population sizes were the following:
 \begin{table}[H]
 \centering
-\begin{tabular}{lccc}
+\begin{tabular}{c c c c c c c}
 \hline
-\textbf{Heuristic} & \textbf{AvG Error (\%)} & \textbf{Min Error (\%)} & \textbf{Std Dev} \\
+\textbf{Pop} & \textbf{Avg Fit} & \textbf{Min Fit} & \textbf{Std Dev} & \textbf{Time/Round} & \textbf{Avg Error \%} & \textbf{Min Error \%} \\
 \hline
-Closest-Neighbor & 24.10 & 8.47 & 5.67 \\
-Quick Tour (Random Insertion) & 10.78 & 4.64 & 3.84 \\
-Pair-Center (Slow/Fast) & 7.27 & 7.27 & 0.00 \\
-Pair-Center (Quick) & 1.74 & 1.74 & 0.00 \\
+50  & 8154.5 & 7764.0 & 252.625909 & 7.603829  & 8.121188 & 2.943516 \\
+100 & 8146.5 & 7846.0 & 227.869809 & 13.515571 & 8.015115 & 4.030761 \\
+200 & 7776.2 & 7542.0 & 234.131074 & 26.246325 & 3.105277 & 0.000000 \\
 \hline
 \end{tabular}
-\caption{Results of the heuristics}
+\caption{PSO experiments on berlin52}
 \end{table}
 
+After these results we observe how we were able to achieve the optimal solution of 7542 with a population of 200, which is a great result, and it shows us that PSO can be effective for solving TSP instances when given enough population diversity.
+We can also see how the average fitness and the minimum fitness improved as we increased the population size, which is consistent with our previous observations in the continuous optimization problems, where a larger population allowed the algorithm to explore more of the search space and find better solutions.
+The computational time also increased with the population size, which is expected, but it is still reasonable.
 
-\subsection{Parameter Analysis}
-In the table below we can observe the different values of the genetic algorithm's parameters and their corresponding results after a parameter sweep like the one performed in the first problem:
+In the following graph we can see the behaviour of the algorithm with different population sizes:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{comparativa_final_pso_tsp_pop.png}
+    \caption{Results of the experiments based on population size for PSO on TSP.}
+    \label{fig:placeholder}
+\end{figure}
+We can see how the configuration with 200 individuals is consistently better than the rest, and it is the only one that was able to achieve the optimal solution, which is represented by the horizontal line at 7542.
+In fact, testing with a large number of iterations (2000) already saves us the specific iteration analysis, as we can see the behaviour of the 
+configurations at each point of the iterations. On iteration 1000, the configuration with 200 individuals was already capable of achieving the optimal solution, and surprisingly,
+the configuration with 50 individuals actually overtook the one with 100, probably due to stochastic effects.
+
+\subsection{GA vs PSO}
+The architecture of the GA that we are going to compare with was based on the best configuration we found in the previous assignment, which had a tournament size of 3 and a mutation rate of 1.0.
+
+Its results were the following:
 \begin{table}[H]
 \centering
-\begin{tabular}{l c c c c c}
+\begin{tabular}{c c c c c c c}
 \hline
-\textbf{Parameter} & \textbf{Value} & \textbf{Avg Error} & \textbf{Min Error} & \textbf{Std Dev} & \textbf{Max Error} \\
+\textbf{Pop} & \textbf{Avg Fit} & \textbf{Min Fit} & \textbf{Std Dev} & \textbf{Time/Round} & \textbf{Avg Error \%} & \textbf{Min Error \%} \\
 \hline
-size\_pop   & 20.00   & 13.51 & 4.18 & 3.64 & 20.75 \\
-size\_pop   & 50.00   & 11.53 & 5.54 & 3.95 & 23.38 \\
-size\_pop   & 200.00  & 8.58  & 2.48 & 3.22 & 16.87 \\
-max\_iter   & 100.00  & 57.64 & 42.73 & 8.07 & 75.07 \\
-max\_iter   & 500.00  & 10.49 & 4.36 & 3.10 & 15.84 \\
-max\_iter   & 2000.00 & 8.67  & 1.70 & 3.87 & 18.77 \\
-prob\_mut   & 0.01    & 72.63 & 52.92 & 11.44 & 103.22 \\
-prob\_mut   & 0.10    & 19.41 & 11.63 & 4.60 & 29.89 \\
-prob\_mut   & 1.00    & 14.70 & 8.00 & 3.90 & 23.50 \\
-tourn\_size & 1.00    & 14.75 & 8.96 & 4.11 & 25.91 \\
-tourn\_size & 3.00    & 9.44  & 2.45 & 3.22 & 15.87 \\
-tourn\_size & 10.00   & 8.97  & 3.55 & 3.06 & 15.94 \\
+   50  & 8095.2 &  7618 & 300.519151 & 5.061666 & 7.334924 & 1.007690 \\
+  100 & 8159.5 &  7731 & 217.658563 & 10.385853 & 8.187483 & 2.505967 \\
+ 200 & 8039.3 &  7542 & 239.275594 & 20.406382 & 6.593742 & 0.000000 \\
 \hline
 \end{tabular}
-\caption{Results of GA Parameter Sweep for TSP (Berlin52)}
+\caption{PSO experiments on berlin52}
 \end{table}
 
-We will then proceed with a more specific analysis for each of the four presented parameters.
+Now with this data we can make several observations. Firstly, both were able to found the optimum with a population
+of 200 but PSO had a better average performance. PSO's average error (3.11\%) 
+was half of GA's (6.59\%), it was more consistent.
+Secondly, GA is computationally faster, exactly 22\% faster 
+than PSO, which is expected given the simpler operations in GA compared to the velocity and position updates in PSO.
+Finally, we could observe the critical role of population size in both algorithms, confirming that TSP needs diversity.
 
+\subsubsection{Which Method to Prefer?}
 
-\subsubsection{Population Size}
+Based on our experiments, we could say that our preference would be determined by the type of the problem we're encountering.
+Both PSO and GA proved capable of reaching the optimal solution under sufficiently large populations and iteration counts, but they offer different advantages:
+ PSO delivered more consistent solution quality with roughly half the average error of GA, 
+ while GA was significantly faster and benefits from a natural permutation‑based encoding and well‑established crossover operators tailored to TSP.
 
-
-
-Beginning with the population size analysis, because in this problem the search space for the berlin52 dataset is dramatically large ($52!$ possible permutations), we expected, and got, a direct correlation between a larger population size and a reduction in the relative error of the discovered tours.
-
-We can appreciate, based on the results, how with a small population of 20 individuals, the algorithm lacks the genetic diversity needed to fully explore the permutation space and frequently gets trapped in local minimums, yielding a high average error of $13.51\%$ and a high maximum error of $20.75\%$.
-
-As the population is increased to the default 50, and then massively to 200, the performance improves significantly. A population of 200 achieves the best average error ($8.58\%$) and dramatically lowers the minimum error found across the 30 runs down to an impressive $2.48\%$. Furthermore, the standard deviation narrows to $3.22$, and the maximum error drops to $16.87\%$, indicating higher reliability. Theoretically, this occurs because with more population comes more genetic diversity, and therefore a wider variety of valid city permutations. This extended spatial coverage, gives the crossover operators a richer set of parental edge sequences, allowing the algorithm to gather optimal sub-tours much more effectively without suffering from premature convergence.
-
-In comparison to the baseline heuristics, while a population of 20 only confidently beats the Closest-Neighbor approach ($24.10\%$), scaling the population to 200 allows the Genetic Algorithm to consistently outperform the Quick Tour heuristic ($10.78\%$) on average, and occasionally rival the highly optimized Pair-Center heuristics in its best runs.
-
-\subsubsection{Number of Generations}
-
-
-
-With the results of the different values of this hyperparameter, we have observed the importance of allowing the algorithm sufficient time to assemble optimal sub-tours (building blocks) into a complete, valid route.
-
-We can appreciate, the disastrous result of the performance when the model is restricted to only 100 generations, with an astonishing average relative error of $57.64\%$, with a massive standard deviation of $8.07$ and maximum errors reaching $75.07\%$. For the big size of this problem, 100 generations are simply insufficient for the crossover and mutation operators to really optimize the results.
-
-With 500 generations, there's a remarkable improvement and this shows how, given adequate time to exploit the genetic material, the algorithm correctly pieces together the local optimal edges, causing the average error to plummet to $10.49\%$. The standard deviation also narrows significantly to $3.10$, indicating a much more stable and predictable convergence pattern.
-
-Finally, with 2000 generations, the overall average error diminishes considerably less (as it was expected) but this reduction in the error is probably due to micro-adjustments in the elite individuals. Nevertheless, the minimum error achieved across the runs hits an extraordinary $1.70\%$. This specific run is of immense significance because it officially outperforms the highly optimized Pair-Center Quick heuristic ($1.74\%$). This proves that, given enough generational time, an evolutionary approach can beat deterministic heuristics. 
-
-\subsubsection{Mutation Probability}
-
-
-
-In the graph above we can see how applying a near-zero mutation rate ($0.01$) to the TSP results in catastrophic failure, yielding an abysmal average error of $72.63\%$ and a massive standard deviation of $11.44$.
-These results were unexpected at first, given the tendency we saw in the first problem of a better performance the lower the mutation rate was. But after some thought, and focusing on the change of paradigm of problem 2, it started to make sense.
-
-In continuous optimization, tiny mutations act like small nudges that help refine a solution smoothly, but in the TSP the search space is made of permutations, so small tweaks don’t fix a fundamentally bad route, you need large structural changes to escape poor city orders. Because crossover in TSP tends to produce children very similar to their parents, a low mutation rate quickly makes the whole population nearly identical, causing premature convergence. 
-
-The data shows that to break out of these rigid local minima, the TSP requires highly aggressive structural changes, that's why increasing the mutation probability to $0.10$ drastically reduces the average error to $19.41\%$ and maximizing the mutation rate to a fully aggressive $1.00$ yields the best performance among the three values tested, lowering the average error to $14.70\%$, the minimum error to $8.00\%$, and stabilizing the standard deviation to $3.90$.
-
-\subsubsection{Tournament Size}
-
-
-
-As expected, reducing the tournament size to 1 results in a poor average relative error of $14.75\%$ and a high standard deviation ($4.11$), this is due to the selection process becoming entirely random.
-
-Meanwhile, we can appreciate how restoring the tournament size to a moderate value of 3 provides an optimal evolutionary balance. This configuration yields a robust average error of $9.44\%$ and crucially, it achieves the absolute best minimum error among the three tested tournament values ($2.45\%$). Given these results, we can affirm that in this case the selection pressure is strong enough to propagate good sub-tours but gentle enough to maintain genetic diversity within the population.
-
-Conversely, augmenting the tournament size to 10 didn't give a major improvement, while the average relative error what slightly better ($8.97\%$), the best run showed a bigger error. This could be the consequence of flooding the population with clones of the early elite individuals, in this case the algorithm suffers from a degree of premature convergence and its exploratory power is diminished, preventing it from discovering the absolute best global routes.
-
-\newpage
-\subsection{Comparison with Classical Heuristics}
-After the analysis from the last section, we needed to use that obtained knowledge and create a genetic algorithm capable of beating the heuristics shown in the theory classes: \textit{Closest Neighbor}, \textit{Quick Tour} and \textit{Pair-Center}. The design selected for this purpose was the following: size\_pop = 200, max\_iter = 2000, prob\_mut = 1.0, tourn\_size = 3. We basically combined all the values that performed the best during their hyperparameter's individual evaluation, tested it across 30 Monte Carlo rounds and directly compared it to the three baseline heuristics provided in the theoretical framework. The result was the following:
-
-
-In the graph above, we can appreciate the results of the different heuristics: the \textit{Closest-Neighbor} approach performed the worst with $24.10\%$, the \textit{Quick Tour} achieved $10.78\%$, and the classical \textit{Pair-Center} algorithm stabilized at $7.27\%$. The highly optimized variant, the \textit{Pair-Center (Quick)}, set a remarkable limit with an error of just $1.74\%$.
-
-On the other hand, we can observe how our genetic algorithm, configured with massive spatial diversity (population of 200) and an extended temporal horizon (2000 generations), achieved an average error of 7.01\%, better that the three principal heuristics and only surpassed by the special faster \textit{Pair-Center}. 
-
-However, these results are taking into account only the average, if we look at the most important metric, the minimum result or best run, our genetic algorithm surpassed them all with a perfect 0.0\% of error. It mathematically reconstructed the absolute global optimum tour for the \textit{berlin52} dataset (a perfect length of 7542).
-
-These results express how, even if the classic heuristics are fast and capable of achieving great results (especially the quick \textit{Pair- Center)}, they inevitably get permanently stuck in complex local minimum, and are no match for a well configured genetic algorithm, which has the capacity to search all the solution space until finding the perfect solution.
-
-% \section{Conclusions}
-% \subsection{Summary of Findings}
-% \subsection{General Recommendations}
-% \subsection{Future Work}
-
-% \section{Appendix}
-% \subsection{Code Snippets}
-% \subsection{Additional Plots}
-% \subsection{Tables of Results}
-
-
-
+ Overall, if we were to choose one method we would slighly prefer GA for TSP because it is able to achieve the same optimal solution as PSO but with a much lower computational time, and because of its natural suitability for combinatorial problems.
 \end{document}

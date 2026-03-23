@@ -15,16 +15,14 @@
 \contentsline {paragraph}{Discussion of Results}{16}{section*.4}%
 \contentsline {subsubsection}{\numberline {2.3.2}Rosenbrock function with DE}{21}{subsubsection.2.3.2}%
 \contentsline {paragraph}{Discussion of Results}{21}{section*.5}%
-\contentsline {subsubsection}{\numberline {2.3.3}Conclusions on DE}{25}{subsubsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.4}Comparative Analysis}{26}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}PSO vs DE}{26}{subsubsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.4.2}Comparison with Genetic Algorithm (GA)}{26}{subsubsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.5}Implementation Analysis (sko Package)}{26}{subsection.2.5}%
-\contentsline {subsubsection}{\numberline {2.5.1}Differences from Standard Theory}{26}{subsubsection.2.5.1}%
-\contentsline {section}{\numberline {3}Problem 2: Travelling Salesman Problem (TSP)}{26}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Parameter Analysis}{26}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}Population Size}{27}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}Number of Generations}{27}{subsubsection.3.1.2}%
-\contentsline {subsubsection}{\numberline {3.1.3}Mutation Probability}{28}{subsubsection.3.1.3}%
-\contentsline {subsubsection}{\numberline {3.1.4}Tournament Size}{28}{subsubsection.3.1.4}%
-\contentsline {subsection}{\numberline {3.2}Comparison with Classical Heuristics}{29}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Conclusions on DE}{26}{subsubsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.4}Comparative Analysis}{27}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}PSO vs DE}{27}{subsubsection.2.4.1}%
+\contentsline {paragraph}{Key Differences Observed:}{27}{section*.6}%
+\contentsline {subsubsection}{\numberline {2.4.2}Comparison with Genetic Algorithm (GA)}{27}{subsubsection.2.4.2}%
+\contentsline {section}{\numberline {3}Problem 2: Travelling Salesman Problem (TSP)}{28}{section.3}%
+\contentsline {subsection}{\numberline {3.1}PSO for TSP}{28}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Parameter Tuning}{28}{subsubsection.3.1.1}%
+\contentsline {paragraph}{Population size}{29}{section*.7}%
+\contentsline {subsection}{\numberline {3.2}GA vs PSO}{30}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Which Method to Prefer?}{30}{subsubsection.3.2.1}%
