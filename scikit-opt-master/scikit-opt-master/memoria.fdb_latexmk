@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1774348409.79539 "c:/Users/enric/Desktop/MIA/EC/LAB/EC-LAB/scikit-opt-master/scikit-opt-master/memoria.tex" "memoria.pdf" "memoria" 1774348438.08514 0
+["pdflatex"] 1774348552.95532 "c:/Users/enric/Desktop/MIA/EC/LAB/EC-LAB/scikit-opt-master/scikit-opt-master/memoria.tex" "memoria.pdf" "memoria" 1774348579.69971 0
   "C:/Users/enric/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1774179438 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/enric/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1740772888 14064 d35361b63672ec05238fca5625547979 ""
   "C:/Users/enric/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1740772831 12015783 6cb5029134bc7dfaab9f373423647402 ""
@@ -176,7 +176,7 @@
   "C:/Users/enric/AppData/Local/Programs/MiKTeX/tex/latex/trimspaces/trimspaces.sty" 1253169183 1380 971a51b00a14503ddf754cab24c3f209 ""
   "C:/Users/enric/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/enric/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/enric/Desktop/MIA/EC/LAB/EC-LAB/scikit-opt-master/scikit-opt-master/memoria.tex" 1774348407 72692 0bd3c3d6add0adeef05395092c88af12 ""
+  "c:/Users/enric/Desktop/MIA/EC/LAB/EC-LAB/scikit-opt-master/scikit-opt-master/memoria.tex" 1774348550 72639 a295e67cb807322d9a1da384a87ace14 ""
   "comparativa_f_cr_de_rosenbrock.png" 1773996783 965157 0445802c32ca921cd627f00adba6622f ""
   "comparativa_f_cr_final_de_rosenbrock.png" 1774093030 966361 dcadc8ba80ec09e839c714da4cc17e95 ""
   "comparativa_final_de_griewank_iter.png" 1773996773 427045 f4497cc3b8299b865961f5e2f4a6b3e2 ""
@@ -194,10 +194,10 @@
   "comparativa_final_pso_rosenbrock_w.png" 1773996388 841972 6092227583429f80bf643929c01b0255 ""
   "comparativa_final_pso_rosenbrock_w_expanded.png" 1773996397 950443 7f569df4a2d50a1775067eac750829e4 ""
   "comparativa_final_pso_tsp_pop.png" 1774203473 65442 e0328154cea125a5d0748ac38d726863 ""
-  "memoria.aux" 1774348436 14133 80b74fc512da4cf59d9ca506f2edd8bc "pdflatex"
-  "memoria.out" 1774348436 4494 6d41e21b061b302fc39fc8536d7e4da5 "pdflatex"
-  "memoria.tex" 1774348407 72692 0bd3c3d6add0adeef05395092c88af12 ""
-  "memoria.toc" 1774348436 2837 ec5e1f357911e4d79fc561bdb9b24682 "pdflatex"
+  "memoria.aux" 1774348578 14133 80b74fc512da4cf59d9ca506f2edd8bc "pdflatex"
+  "memoria.out" 1774348578 4494 6d41e21b061b302fc39fc8536d7e4da5 "pdflatex"
+  "memoria.tex" 1774348550 72639 a295e67cb807322d9a1da384a87ace14 ""
+  "memoria.toc" 1774348578 2837 ec5e1f357911e4d79fc561bdb9b24682 "pdflatex"
   "pareto_front_pso.png" 1774311361 181384 516ac3af0e6cea71b30357c044e59bfe ""
   "portada.png" 1773997368 10319 e3145a0f1c17dcda4a4e75ffdc33e29b ""
   (generated)
