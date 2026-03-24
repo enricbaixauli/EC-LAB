@@ -27,12 +27,7 @@
 
 \tableofcontents
 \newpage
-\section{Introduction}
 
-\subsection{Description of the Problems}
-
-
-\newpage
 
 \section{Problem 1: Continuous Optimization}
 
@@ -906,4 +901,122 @@ Both PSO and GA proved capable of reaching the optimal solution under sufficient
  while GA was significantly faster and benefits from a natural permutation‑based encoding and well‑established crossover operators tailored to TSP.
 
  Overall, if we were to choose one method we would slighly prefer GA for TSP because it is able to achieve the same optimal solution as PSO but with a much lower computational time, and because of its natural suitability for combinatorial problems.
-\end{document}
+\section{Problem 3: TSP PSO with Rank Order Value}
+For the third problem of this assignment, we are going to test the PSO algorithm on the TSP again, but this time we will make use of the implementation
+given in class, which is based on the Rank Order Value (ROV) method for encoding the solutions.
+This method is a way to represent the solutions of the TSP in a way that is suitable for PSO, as it allows us to use the continuous position and velocity updates of PSO while still maintaining a valid TSP solution.
+We will test this implementation on the same berlin52 TSP instance, and we will compare the results with the previous PSO implementation that we tested in Problem 2, which was based on discretization of the continuous PSO.
+\subsection{Parameter Tuning}
+In this implemantation, we were able to tune the inertia weight $w$ and the cognitive and social coefficients $c1$ and $c2$, in addition to the population size and the number of iterations.
+We will try different values for these parameters to observe this implementation's behaviour and to find the best configuration for solving the TSP.
+After that we will compare the results with the previous PSO implementation to see if the ROV method provides any improvement in solution quality or computational efficiency.
+
+The default values for population size and number of iterations were 100 and 500 respectively, we decided to not test on the iterations because we already saw the small impact of iterations on the previous PSO implementation.
+
+Note: This analysis was done with 30 runs, instead of 10, to get more reliable results, as the stochastic nature of PSO can lead to high variability in outcomes, but the final comparison
+will be done with 10 runs.
+\paragraph{w, c1 and c2}
+
+
+We tested a range of values and got the following results:
+
+\begin{table}[H]
+        \centering
+        \begin{tabular}{c c c c c c c c}
+        \hline
+        \textbf{w} & \textbf{c1} & \textbf{c2} & \textbf{Avg Fit} & \textbf{Min Fit} & \textbf{Gap} & \textbf{Avg Time} & \textbf{Std Dev} \\
+        \hline
+        0.8 & 1.0 & 1.0 & 17683.00 & 14999.0 &  98.87 & 0.777 & 1360.82\\ 
+        0.9 & 0.5 & 0.6 & 18661.63 & 16811.0 & 122.90 & 0.799 & 946.31 \\
+        0.6 & 1.8 & 1.8 & 16318.77 & 13123.0 & 74.00 & 0.765 & 1288.81 \\
+        0.7 & 0.5 & 2.5 & 19704.57 & 16899.0 & 124.07 & 0.759 & 1434.94 \\
+        \hline
+        \end{tabular}
+        \caption{Partial results of w, c1 and c2 on PSO, TSP.}
+\end{table}
+
+The best configuration was the one with $w=0.6$, $c1=1.8$ and $c2=1.8$, which achieved a minimum fitness of 13123, which is the closest to the optimal solution of 7542, but still far from it.
+This configuration is interesting because it has a relatively low inertia weight, which means that the particles are more influenced by their own experience and less by the swarm's overall movement, and it has high cognitive and social coefficients, which means that the particles are strongly influenced by both their own best position and the global best position.
+
+We kept exploring the area around this configuration, testing the following values:
+\begin{table}[H]
+        \centering
+        \begin{tabular}{c c c c c c c c}
+        \hline
+        \textbf{w} & \textbf{c1} & \textbf{c2} & \textbf{Avg Fit} & \textbf{Min Fit} & \textbf{Gap} & \textbf{Avg Time} & \textbf{Std Dev} \\
+        \hline
+        0.6 & 1.8 & 1.8 & 15593.67 & 13243.0 & 75.59 & 0.724 & 1310.70\\ 
+         0.6 & 2.0 & 2.0 & 16331.33 & 13872.0 & 83.93 & 0.711 & 1289.71 \\
+        0.7 & 1.8 & 1.8 & 16593.67 & 14153.0 & 87.66 & 0.713 & 1163.40 \\
+        0.5 & 1.8 & 1.8 & 15594.80 & 13190.0 & 74.89 & 0.704 & 1120.70 \\
+        0.6 & 1.0 & 1.8 & 17959.40 & 15344.0 & 103.45 & 0.697 & 1057.30 \\
+        0.6 & 1.8 & 1.0 & 15438.00 & 13758.0 & 82.42 & 0.691 & 1015.60 \\
+        \hline
+        \end{tabular}
+        \caption{Definitive results of w, c1 and c2 on PSO, TSP.}
+\end{table}
+
+We can appreciate how the best configuration of this second comparison (w=0.5, c1=1.8 and c2=1.8) provides practically the same results as the previous best configuration, which means that the algorithm is not very sensitive to small changes in these parameters, and that we are probably in a good area of the parameter space.
+On theother hand, the configuration with $w=0.6$, $c1=1.0$ and $c2=1.8$ is the worst one, which shows us that having a low cognitive coefficient can be detrimental for the performance of the algorithm, as it makes the particles less influenced by their own experience, which can lead to a lack of exploration and a higher chance of getting stuck in local minimums.
+
+\paragraph{Population Size}
+Moving on, after fixing the best configuration for $w$, $c1$ and $c2$, we tested the impact of the population size, and the results were the following:
+\begin{table}[H]
+        \centering
+        \begin{tabular}{c c c c c c c}
+        \hline
+        \textbf{Pop} & \textbf{Avg Fit} & \textbf{Min Fit} & \textbf{Gap} & \textbf{Avg Time} & \textbf{Std Dev} \\
+        \hline
+        30  & 16914.17 & 14275.0 & 89.27 & 0.214 & 1387.14 \\
+        50  & 16340.40 & 13581.0 & 80.07 & 0.350 & 1400.23 \\
+        200 & 15130.27 & 11638.0 & 54.31 & 1.572 & 1474.96 \\
+        600 & 14235.60 & 11994.0 & 59.03 & 4.485 & 1178.02 \\
+        \hline
+        \end{tabular}
+        \caption{Results of different population sizes for PSO with ROV on TSP.}
+\end{table}
+Here we can appreciate an improvement in the average results as we increase the population size, but the minimum fitness and the gap to the optimal solution do not show a clear improvement, which is a bit surprising, as we expected that with more individuals in the population we would be able to find better solutions, but it seems that the algorithm is not able to take advantage of the increased diversity provided by a larger population, which could be due to the fact that the algorithm is getting stuck in local minimums and is not able to explore the search space effectively.
+It's also important to note that these results of 11638 and 11994 are still far from the optimal solution of 7542, not even with a large population this implementation is able to find good solutions.
+
+\subsection{Pareto Front Analysis: Runtime vs. Gap}
+To really understand how well our implementations work, we can't just look at the final distance. In the real world, we also care about how long the algorithm takes to run. This creates a classic trade-off between speed and quality (the gap to the optimum). To analyze this, we look for "dominant" configurations,
+those that give us the best possible gap for the time they take, without being beaten by a faster and better alternative. These best options make up what we call the Pareto front.
+
+Looking at the data from our population size tests (where we kept $w=0.6$, $c1=1.8$, and $c2=1.8$), we can see exactly how the ROV-based PSO behaves:
+
+\begin{itemize}
+    \item \textbf{Pop 30:} (Time: 0.214s, Gap: 89.27\%) - This is our fastest run. It sits at the extreme left of the Pareto front if all we care about is speed, though the gap is obviously huge.
+    \item \textbf{Pop 50:} (Time: 0.350s, Gap: 80.07\%) - This is a very logical trade-off. By sacrificing just a tiny fraction of a second, we manage to drop the gap by about 9\%.
+    \item \textbf{Pop 200:} (Time: 1.572s, Gap: 54.31\%) - Here we achieve our best overall gap. It takes about a second and a half, making it a very strong dominant point on our front if we prioritize solution quality.
+    \item \textbf{Pop 600:} (Time: 4.485s, Gap: 59.03\%) - This point is completely dominated. It takes almost three times as long as a population of 200, but actually gives us a worse result. This is a great example of diminishing returns: making the swarm massive doesn't help it find a better route in the continuous ROV space; it just makes it slower and harder to converge within our iteration limit.
+\end{itemize}
+
+% Afegeix aquí la imatge del plot del Pareto que generaràs amb Python
+
+
+\subsubsection{Comparison with Discrete PSO}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pareto_front_pso.png} 
+    \caption{Pareto front comparison of the tested configurations. Points closer to the bottom-left corner represent the best trade-offs.}
+    \label{fig:pareto_pso}
+\end{figure}
+To get a better perspective on these results, we decided to add the data from the Discrete PSO implementation (from Problem 2) into our Pareto analysis. 
+
+The discrete implementation gave us the following results: a gap of 14.9\% (in 1.544s) with a population of 50, a gap of 9.81\% (in 3.084s) with a population of 100, and an impressive 0.0\% gap (finding the exact optimal solution) in 7.145s with a population of 200. 
+
+When we look at both algorithms side by side on the Pareto front, the conclusions are quite clear. The Discrete PSO heavily dominates the ROV implementation. For instance, if we compare ROV with a population of 200 and Discrete with a population of 50, they both take around 1.5 seconds to run. However, the ROV method gives us a huge gap of 54.31\%, while the Discrete method drops the gap to 14.9\%. 
+
+The ROV implementation is generally faster per iteration because working with continuous arrays is computationally cheap. However, it struggles a lot to find good solutions. This happens because the ROV approach searches in a massive 52-dimensional continuous space and relies on the \texttt{argsort} function to "guess" the permutations. Any small change in the continuous values can completely shuffle the route, making it very hard for the swarm to converge on the optimal path. 
+
+On the other hand, the Discrete PSO uses swap operators and swap sequences, meaning it moves directly through the space of valid permutations. Even though calculating these swap sequences takes more time per iteration (as seen in the 7.145s runtime for Pop 200), the moves are much more meaningful for the Traveling Salesperson Problem.
+
+\paragraph{Final Conclusion}
+As a final conclusion, while the ROV method is an interesting trick to apply a continuous optimization algorithm to a combinatorial problem, it is highly inefficient for a 52-city TSP. The continuous mapping fails to capture the structure of the routes, leaving us with gaps around 50-80\%. Therefore, if we want to solve the TSP effectively, adapting the algorithm's operators to the discrete space (like the Discrete PSO does) is definitely the better and more reliable choice.
+% \subsection{Conclusion of ROV}
+% With these results, our first impression is that they are all really poor, with a minimum fitness of 11638 at best, which is far from the optimal solution of 7542.
+% They are substantially worse than the previous PSO implementation, and it is hard to imagine any tweaking of the parameters that could lead to a significant improvement, as the gap is really big.
+% This could be due to several reasons, such as the fact that the ROV method is not
+ \end{document}
+
+
