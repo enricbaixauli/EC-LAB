@@ -452,7 +452,6 @@ INPUT .\pareto_front_pso.png
 INPUT .\pareto_front_pso.png
 INPUT .\pareto_front_pso.png
 INPUT .\pareto_front_pso.png
-INPUT C:\Users\enric\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt12.tfm
 INPUT memoria.aux
 INPUT .\memoria.out
 INPUT .\memoria.out
@@ -466,5 +465,3 @@ INPUT C:\Users\enric\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\c
 INPUT C:\Users\enric\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
 INPUT C:\Users\enric\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
 INPUT C:\Users\enric\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
-INPUT C:\Users\enric\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt12.pfb
-INPUT C:\Users\enric\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt12.pfb

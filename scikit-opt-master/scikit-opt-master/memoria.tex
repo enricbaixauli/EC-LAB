@@ -112,7 +112,7 @@ In this section we are will analyse the results of the experiments with the PSO 
         
          With this in mind, we decided to further explore the area around the winning configuration, testing the following values:
          
-         \begin{table}[h!]
+         \begin{table}[H]
                 \centering
                 \begin{tabular}{c c c c l}
                 \hline
@@ -197,7 +197,7 @@ In this section we are will analyse the results of the experiments with the PSO 
         
         Finally, we tested the impact of the number of iterations, we used the same criteria as before with three values to represent a low, medium and high number of iterations.
         We are aware that this variable will only give more "time" to the algorithm to find better solutions, but we wanted to test if there was a point of diminishing returns, where increasing the number of iterations does not lead to significant improvements in fitness or if, on the contrary, there's a threshold of iterations needed to drastically improve the results. The results were the following:
-        \begin{table}[h!]
+        \begin{table}[H]
         \centering
         \begin{tabular}{c c c c}
         \hline
@@ -437,7 +437,7 @@ In this section we will perform the same experiments as with PSO, but with the D
         However, this steady improvement is probably driven by its ability to preserve genetic diversity, and explore more extensively the search space, but its large mutation and crossover rates prevent it from fine-tuning solutions within the narrow basin of the global optimum. In contrast, the better-performing configurations benefit from smaller, more precise steps that allow them to exploit promising regions more effectively.    
         
         After some deliberation, we decided to further explore the area around the winning configuration, testing the following values:
-         \begin{table}[h!]
+         \begin{table}[H]
                 \centering
                 \begin{tabular}{c c c c l}
                 \hline
@@ -1007,11 +1007,13 @@ The discrete implementation gave us the following results: a gap of 14.9\% (in 1
 
 When we look at both algorithms side by side on the Pareto front, the conclusions are quite clear. The Discrete PSO heavily dominates the ROV implementation. For instance, if we compare ROV with a population of 200 and Discrete with a population of 50, they both take around 1.5 seconds to run. However, the ROV method gives us a huge gap of 54.31\%, while the Discrete method drops the gap to 14.9\%. 
 
-The ROV implementation is generally faster per iteration because working with continuous arrays is computationally cheap. However, it struggles a lot to find good solutions. This happens because the ROV approach searches in a massive 52-dimensional continuous space and relies on the \texttt{argsort} function to "guess" the permutations. Any small change in the continuous values can completely shuffle the route, making it very hard for the swarm to converge on the optimal path. 
+The ROV implementation is generally faster per iteration because working with continuous arrays is computationally cheap. However, it struggles a lot to find good solutions. This happens because the ROV approach searches in a massive 52-dimensional continuous space and relies on the argsort function to "guess" the permutations. Any small change in the continuous values can completely shuffle the route, making it very hard for the swarm to converge on the optimal path. 
 
 On the other hand, the Discrete PSO uses swap operators and swap sequences, meaning it moves directly through the space of valid permutations. Even though calculating these swap sequences takes more time per iteration (as seen in the 7.145s runtime for Pop 200), the moves are much more meaningful for the Traveling Salesperson Problem.
 
 \paragraph{Final Conclusion}
+
+
 As a final conclusion, while the ROV method is an interesting trick to apply a continuous optimization algorithm to a combinatorial problem, it is highly inefficient for a 52-city TSP. The continuous mapping fails to capture the structure of the routes, leaving us with gaps around 50-80\%. Therefore, if we want to solve the TSP effectively, adapting the algorithm's operators to the discrete space (like the Discrete PSO does) is definitely the better and more reliable choice.
 % \subsection{Conclusion of ROV}
 % With these results, our first impression is that they are all really poor, with a minimum fitness of 11638 at best, which is far from the optimal solution of 7542.
